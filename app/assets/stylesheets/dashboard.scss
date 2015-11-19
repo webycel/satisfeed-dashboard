@@ -1,0 +1,32 @@
+// Place all the styles related to the Dashboard controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.filters {
+	padding: 1.5em 0;
+}
+
+.store {
+	padding: 2.8em 0;
+
+	.store-id {
+		margin: -0.3em 0 0.5em;
+	}
+
+	.reviews {
+		margin: 0;
+		list-style: none;
+		p {
+			margin: 0;
+		}
+
+		> li {
+			display: block;
+			padding-bottom: 1em;
+			margin-bottom: 2em;
+			border-bottom: 1px solid $black;
+		}
+		.info {
+			padding-top: 1em;
+		}
+	}
+}

@@ -1,14 +1,30 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>SatisfeedDashboard</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<%= yield %>
+    <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
 
-</body>
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+
+    <header class="header row">
+      <nav class="small-12 small-centered columns">
+          <%= link_to "", root_path, :class => "ms-logo" %>
+
+          <ul class="nav">
+              <li><%= link_to "Store reviews", root_path %></li>
+          </ul>
+      </nav>
+    </header>
+
+    <%= yield %>
+
+  </body>
 </html>

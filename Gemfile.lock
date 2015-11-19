@@ -51,8 +51,15 @@ GEM
     debug_inspector (0.0.2)
     erubis (2.7.0)
     execjs (2.6.0)
+    firebase (0.2.5)
+      httpclient
+      json
+    foundation-rails (5.5.2.1)
+      railties (>= 3.1.0)
+      sass (>= 3.3.0, < 3.5)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    httpclient (2.7.0.1)
     i18n (0.7.0)
     jbuilder (2.3.2)
       activesupport (>= 3.0.0, < 5)
@@ -140,7 +147,8 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
-  coffee-rails (~> 4.1.0)
+  firebase
+  foundation-rails
   jbuilder (~> 2.0)
   jquery-rails
   rails (= 4.2.4)

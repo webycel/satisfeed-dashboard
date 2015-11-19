@@ -1,0 +1,55 @@
+<div class="row">
+
+	<section class="filters small-3 columns">
+
+		<%= form_tag "/store", :method => "GET" do %>
+			<%= label_tag :store_id, "Enter Store ID:" %>
+			<%= text_field_tag :store_id %>
+			<%= submit_tag "Search", :class => "button small expand" %>
+		<% end %>
+
+	</section>
+
+	<section class="store small-9 columns">
+
+		<% if !@store_id %>
+			<p class="panel text-center">
+				Please enter a store ID to view the reviews for a specific store.
+			</p>
+		<% else %>
+			<% if !@store.body %>
+				<p class="panel text-center">
+					Sorry, couldn't find any data with this Store ID.
+				</p>
+			<% else %>
+				<h1 class="store-id">Store ID: <%= @store_id %></h1>
+
+				<ul class="reviews">
+				<% @store.body.each do |key, s| %>
+					<li class="row">
+						<div class="small-2 columns">
+							<img src="<%= image_url(s['experience'] + '.png') %>" width="100%" alt="<%= s['experience'] %> experience" />
+						</div>
+						<div class="info small-10 columns">
+							<% if s['extraInfo'].length > 0 %>
+								<p><%= s['extraInfo'] %></p>
+							<% end %>
+							<% if s['why'] && s['why'].any? %>
+								<br>
+								<b>Reasons:</b>
+								<ul>
+								<% s['why'].each do |why| %>
+									<li><%= why %></li>
+								<% end %>
+								</ul>
+							<% end %>
+						</div>
+					</li>
+				<% end %>
+				</ul>
+			<% end %>
+		<% end %>
+
+	</section>
+
+</div>
