@@ -38,10 +38,12 @@
 				<ul class="reviews">
 				<% @store.body.each do |key, s| %>
 					<li class="row">
-						<div class="small-2 columns">
+						<div class="info small-2 columns">
 							<img src="<%= image_url(s['experience'] + '.png') %>" width="100%" alt="<%= s['experience'] %> experience" />
+							<%= s['time'].to_date %>
+							<%= s['time'].split[4] %>
 						</div>
-						<div class="info small-10 columns">
+						<div class="reason small-10 columns">
 							<% if s['extraInfo'].length > 0 %>
 								<p><%= s['extraInfo'] %></p>
 							<% end %>

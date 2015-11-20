@@ -8,7 +8,7 @@ class DashboardController < ApplicationController
 		@store_id = params["store_id"]
 		@store = Store.get(@store_id)
 
-		if @store
+		if @store.body
 			@good_experiences = Store.get_by_experience(@store.body, "good")
 			@bad_experiences = Store.get_by_experience(@store.body, "bad")
 		end

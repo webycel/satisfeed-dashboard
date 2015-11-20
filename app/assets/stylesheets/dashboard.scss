@@ -15,12 +15,13 @@
 	.overview.panel {
 		margin-bottom: 2em;
 		text-align: center;
-		font-weight: bold; 
+		font-weight: bold;
 	}
 
 	.reviews {
 		margin: 0;
 		list-style: none;
+		
 		p {
 			margin: 0;
 		}
@@ -32,6 +33,10 @@
 			border-bottom: 1px solid $black;
 		}
 		.info {
+			text-align: center;
+			font-size: 0.75em;
+		}
+		.reason {
 			padding-top: 1em;
 		}
 	}
