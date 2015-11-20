@@ -99,8 +99,8 @@
 					<ul class="reviews">
 					<% @store.each do |key, s| %>
 						<li class="row">
-							<div class="-2 columns">
-								<img src="<%= image_url(s['experience'] + '.svg') %>" width="16%" alt="<%= s['experience'] %> experience" />
+							<div class="info small-2 columns">
+								<img src="<%= image_url(s['experience'] + '.svg') %>" width="100%" alt="<%= s['experience'] %> experience" />
 								<%= s['time'].to_date %>
 								<%= s['time'].split[4] %>
 							</div>

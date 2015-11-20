@@ -20,6 +20,11 @@
 		border-top: 1px solid $iron;
 		text-align: center;
 
+		> a {
+			display: inline-block;
+			margin-bottom: 0.75em;
+		}
+
 		&:last-child {
 			border-bottom: 1px solid $iron;
 		}
@@ -56,6 +61,10 @@
 		.info {
 			text-align: center;
 			font-size: 0.75em;
+
+			img {
+				margin-bottom: 0.5em;
+			}
 		}
 		.reason {
 			padding-top: 1em;
