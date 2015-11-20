@@ -6,6 +6,7 @@ class DashboardController < ApplicationController
 
 	def store
 		@store_id = params["store_id"]
+		@filter_range = params["range"] || "anytime"
 		@filter_experience = params["experience"]
 		@store = Store.get(@store_id).body
 
@@ -18,6 +19,12 @@ class DashboardController < ApplicationController
 			@store = @good_experiences
 		elsif @filter_experience == "bad"
 			@store = @bad_experiences
+		end
+
+		if @filter_range == "today"
+			@store = Store.filter_by_date("today", @store)
+		elsif @filter_range == "yesterday"
+			@store = Store.filter_by_date("yesterday", @store)
 		end
 
 		render "dashboard/index"
