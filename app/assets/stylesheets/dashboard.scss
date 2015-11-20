@@ -13,7 +13,12 @@
 		border-top: 1px solid $iron;
 		border-bottom: 1px solid $iron;
 		text-align: center;
-		font-weight: bold;
+
+		a {
+			display: block;
+			color: $black;
+			font-weight: bold;
+		}
 	}
 }
 

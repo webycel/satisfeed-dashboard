@@ -8,16 +8,25 @@
 			<%= submit_tag "Search", :class => "button small expand" %>
 		<% end %>
 
-		<div class="rating">
-			<div class="large-4 large-offset-2 columns">
-				<img src="<%= image_url('good.png') %>" width="100%" alt="good experience" />
-				<%= @good_experiences.length %>
+		<% if @good_experiences %>
+			<div class="rating">
+
+				<h5 class="title">Overall experience</h5>
+
+				<div class="medium-4 medium-offset-2 columns">
+					<%= link_to store_path(:controller => "dashboard", :store_id => @store_id, :experience => "good") do %>
+						<img src="<%= image_url('good.png') %>" width="100%" alt="good experience" />
+						<%= @good_experiences.length %>
+					<% end %>
+				</div>
+				<div class="medium-4 columns end">
+					<%= link_to store_path(:controller => "dashboard", :store_id => @store_id, :experience => "bad") do %>
+						<img src="<%= image_url('bad.png') %>" width="100%" alt="bad experience" />
+						<%= @bad_experiences.length %>
+					<% end %>
+				</div>
 			</div>
-			<div class="large-4 columns end">
-				<img src="<%= image_url('bad.png') %>" width="100%" alt="bad experience" />
-				<%= @bad_experiences.length %>
-			</div>
-		</div>
+		<% end %>
 
 	</section>
 
@@ -28,38 +37,44 @@
 				Please enter a store ID to view the reviews for a specific store.
 			</p>
 		<% else %>
-			<% if !@store.body %>
+			<% if !@store %>
 				<p class="panel text-center">
 					Sorry, couldn't find any data with this Store ID.
 				</p>
 			<% else %>
 				<h1 class="store-id">Store ID: <%= @store_id %></h1>
 
-				<ul class="reviews">
-				<% @store.body.each do |key, s| %>
-					<li class="row">
-						<div class="info small-2 columns">
-							<img src="<%= image_url(s['experience'] + '.png') %>" width="100%" alt="<%= s['experience'] %> experience" />
-							<%= s['time'].to_date %>
-							<%= s['time'].split[4] %>
-						</div>
-						<div class="reason small-10 columns">
-							<% if s['extraInfo'].length > 0 %>
-								<p><%= s['extraInfo'] %></p>
-							<% end %>
-							<% if s['why'] && s['why'].any? %>
-								<br>
-								<b>Reasons:</b>
-								<ul>
-								<% s['why'].each do |why| %>
-									<li><%= why %></li>
+				<% if @store.length > 0 %>
+					<ul class="reviews">
+					<% @store.each do |key, s| %>
+						<li class="row">
+							<div class="info small-2 columns">
+								<img src="<%= image_url(s['experience'] + '.png') %>" width="100%" alt="<%= s['experience'] %> experience" />
+								<%= s['time'].to_date %>
+								<%= s['time'].split[4] %>
+							</div>
+							<div class="reason small-10 columns">
+								<% if s['extraInfo'].length > 0 %>
+									<p><%= s['extraInfo'] %></p>
 								<% end %>
-								</ul>
-							<% end %>
-						</div>
-					</li>
+								<% if s['why'] && s['why'].any? %>
+									<br>
+									<b>Reasons:</b>
+									<ul>
+									<% s['why'].each do |why| %>
+										<li><%= why %></li>
+									<% end %>
+									</ul>
+								<% end %>
+							</div>
+						</li>
+					<% end %>
+					</ul>
+				<% else %>
+					<p class="panel text-center">
+						Sorry, couldn't find any experiences with this Store ID and filter.
+					</p>
 				<% end %>
-				</ul>
 			<% end %>
 		<% end %>
 
