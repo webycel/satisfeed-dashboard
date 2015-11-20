@@ -24,6 +24,17 @@
 			<% else %>
 				<h1 class="store-id">Store ID: <%= @store_id %></h1>
 
+				<div class="row panel overview">
+					<div class="large-1 large-offset-5 columns">
+						<img src="<%= image_url('good.png') %>" width="100%" alt="good experience" />
+						<%= @good_experiences.length %>
+					</div>
+					<div class="large-1 columns end">
+						<img src="<%= image_url('bad.png') %>" width="100%" alt="bad experience" />
+						<%= @bad_experiences.length %>
+					</div>
+				</div>
+
 				<ul class="reviews">
 				<% @store.body.each do |key, s| %>
 					<li class="row">

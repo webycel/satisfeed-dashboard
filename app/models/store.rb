@@ -8,4 +8,9 @@ class Store < ActiveRecord::Base
 		firebase.get("stores/" + store_id)
 	end
 
+	def self.get_by_experience experiences, rating
+		filtered_list = Array.new
+		experiences.select { |k,experience| experience["experience"] == rating  }
+	end
+
 end
