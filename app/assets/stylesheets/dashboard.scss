@@ -8,11 +8,13 @@
 .store-reviews {
 	.rating {
 		overflow: auto;
-		margin-bottom: 2em;
 		padding: 0.75em 0;
 		border-top: 1px solid $iron;
-		border-bottom: 1px solid $iron;
 		text-align: center;
+
+		&:last-child {
+			border-bottom: 1px solid $iron;
+		}
 
 		a {
 			display: block;

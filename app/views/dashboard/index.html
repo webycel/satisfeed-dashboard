@@ -4,11 +4,11 @@
 
 		<%= form_tag "/store", :method => "GET" do %>
 			<%= label_tag :store_id, "Enter Store ID:" %>
-			<%= text_field_tag :store_id %>
+			<%= text_field_tag :store_id,  @store_id %>
 			<%= submit_tag "Search", :class => "button small expand" %>
 		<% end %>
 
-		<% if @good_experiences %>
+		<% if @good_experiences && @bad_experiences %>
 			<div class="rating">
 
 				<h5 class="title">Overall experience</h5>
@@ -23,6 +23,42 @@
 					<%= link_to store_path(:controller => "dashboard", :store_id => @store_id, :experience => "bad") do %>
 						<img src="<%= image_url('bad.png') %>" width="100%" alt="bad experience" />
 						<%= @bad_experiences.length %>
+					<% end %>
+				</div>
+			</div>
+
+			<div class="rating">
+
+				<h5 class="title">Today's experience</h5>
+
+				<div class="medium-4 medium-offset-2 columns">
+					<%= link_to store_path(:controller => "dashboard", :store_id => @store_id, :experience => "good") do %>
+						<img src="<%= image_url('good.png') %>" width="100%" alt="good experience" />
+						<%= Store.filter_by_date("today", @good_experiences).length %>
+					<% end %>
+				</div>
+				<div class="medium-4 columns end">
+					<%= link_to store_path(:controller => "dashboard", :store_id => @store_id, :experience => "bad") do %>
+						<img src="<%= image_url('bad.png') %>" width="100%" alt="bad experience" />
+						<%= Store.filter_by_date("today", @bad_experiences).length %>
+					<% end %>
+				</div>
+			</div>
+
+			<div class="rating">
+
+				<h5 class="title">Yesterday's experience</h5>
+
+				<div class="medium-4 medium-offset-2 columns">
+					<%= link_to store_path(:controller => "dashboard", :store_id => @store_id, :experience => "good") do %>
+						<img src="<%= image_url('good.png') %>" width="100%" alt="good experience" />
+						<%= Store.filter_by_date("yesterday", @good_experiences).length %>
+					<% end %>
+				</div>
+				<div class="medium-4 columns end">
+					<%= link_to store_path(:controller => "dashboard", :store_id => @store_id, :experience => "bad") do %>
+						<img src="<%= image_url('bad.png') %>" width="100%" alt="bad experience" />
+						<%= Store.filter_by_date("yesterday", @bad_experiences).length %>
 					<% end %>
 				</div>
 			</div>
