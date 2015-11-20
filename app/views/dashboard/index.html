@@ -5,7 +5,7 @@
 		<%= form_tag "/store", :method => "GET" do %>
 			<%= label_tag :store_id, "Enter Store ID:" %>
 			<%= text_field_tag :store_id,  @store_id %>
-			<%= submit_tag "Search", :class => "button small expand" %>
+			<%= submit_tag "Search", :class => "button expand" %>
 		<% end %>
 
 		<% if @good_experiences && @bad_experiences %>
