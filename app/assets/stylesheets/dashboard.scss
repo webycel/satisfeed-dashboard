@@ -5,6 +5,18 @@
 	padding: 1.5em 0;
 }
 
+.store-reviews {
+	.rating {
+		overflow: auto;
+		margin-bottom: 2em;
+		padding: 0.75em 0;
+		border-top: 1px solid $iron;
+		border-bottom: 1px solid $iron;
+		text-align: center;
+		font-weight: bold;
+	}
+}
+
 .store {
 	padding: 2.8em 0;
 
@@ -12,16 +24,10 @@
 		margin: -0.3em 0 0.5em;
 	}
 
-	.overview.panel {
-		margin-bottom: 2em;
-		text-align: center;
-		font-weight: bold;
-	}
-
 	.reviews {
 		margin: 0;
 		list-style: none;
-		
+
 		p {
 			margin: 0;
 		}
