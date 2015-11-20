@@ -15,13 +15,13 @@
 
 				<div class="medium-4 medium-offset-2 columns">
 					<%= link_to store_path(:controller => "dashboard", :store_id => @store_id, :experience => "good") do %>
-						<img src="<%= image_url('good.png') %>" width="100%" alt="good experience" />
+						<img src="<%= image_url('good.svg') %>" width="100%" alt="good experience" />
 						<%= @good_experiences.length %>
 					<% end %>
 				</div>
 				<div class="medium-4 columns end">
 					<%= link_to store_path(:controller => "dashboard", :store_id => @store_id, :experience => "bad") do %>
-						<img src="<%= image_url('bad.png') %>" width="100%" alt="bad experience" />
+						<img src="<%= image_url('bad.svg') %>" width="100%" alt="bad experience" />
 						<%= @bad_experiences.length %>
 					<% end %>
 				</div>
@@ -33,13 +33,13 @@
 
 				<div class="medium-4 medium-offset-2 columns">
 					<%= link_to store_path(:controller => "dashboard", :store_id => @store_id, :experience => "good", :range => "today") do %>
-						<img src="<%= image_url('good.png') %>" width="100%" alt="good experience" />
+						<img src="<%= image_url('good.svg') %>" width="100%" alt="good experience" />
 						<%= Store.filter_by_date("today", @good_experiences).length %>
 					<% end %>
 				</div>
 				<div class="medium-4 columns end">
 					<%= link_to store_path(:controller => "dashboard", :store_id => @store_id, :experience => "bad", :range => "today") do %>
-						<img src="<%= image_url('bad.png') %>" width="100%" alt="bad experience" />
+						<img src="<%= image_url('bad.svg') %>" width="100%" alt="bad experience" />
 						<%= Store.filter_by_date("today", @bad_experiences).length %>
 					<% end %>
 				</div>
@@ -51,13 +51,13 @@
 
 				<div class="medium-4 medium-offset-2 columns">
 					<%= link_to store_path(:controller => "dashboard", :store_id => @store_id, :experience => "good", :range => "yesterday") do %>
-						<img src="<%= image_url('good.png') %>" width="100%" alt="good experience" />
+						<img src="<%= image_url('good.svg') %>" width="100%" alt="good experience" />
 						<%= Store.filter_by_date("yesterday", @good_experiences).length %>
 					<% end %>
 				</div>
 				<div class="medium-4 columns end">
 					<%= link_to store_path(:controller => "dashboard", :store_id => @store_id, :experience => "bad", :range => "yesterday") do %>
-						<img src="<%= image_url('bad.png') %>" width="100%" alt="bad experience" />
+						<img src="<%= image_url('bad.svg') %>" width="100%" alt="bad experience" />
 						<%= Store.filter_by_date("yesterday", @bad_experiences).length %>
 					<% end %>
 				</div>
@@ -99,8 +99,8 @@
 					<ul class="reviews">
 					<% @store.each do |key, s| %>
 						<li class="row">
-							<div class="info small-2 columns">
-								<img src="<%= image_url(s['experience'] + '.png') %>" width="100%" alt="<%= s['experience'] %> experience" />
+							<div class="-2 columns">
+								<img src="<%= image_url(s['experience'] + '.svg') %>" width="16%" alt="<%= s['experience'] %> experience" />
 								<%= s['time'].to_date %>
 								<%= s['time'].split[4] %>
 							</div>
