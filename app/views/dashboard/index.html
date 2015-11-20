@@ -11,7 +11,7 @@
 		<% if @good_experiences && @bad_experiences %>
 			<div class="rating">
 
-				<h5 class="title">Overall experience</h5>
+				<%= link_to "Overall experience", store_path(:controller => "dashboard", :store_id => @store_id) %>
 
 				<div class="medium-4 medium-offset-2 columns">
 					<%= link_to store_path(:controller => "dashboard", :store_id => @store_id, :experience => "good") do %>
@@ -89,7 +89,9 @@
 						<% if @filter_experience %>
 							<span>| <%= @filter_experience %> experience</span>
 						<% end %>
-						<%= link_to "Clear all filters", store_path(:controller => "dashboard", :store_id => @store_id), :class => "right" %>
+						<% if @filter_range != "anytime" || @filter_experience %>
+							<%= link_to "Clear all filters", store_path(:controller => "dashboard", :store_id => @store_id), :class => "right" %>
+						<% end %>
 					</p>
 				<% end %>
 
