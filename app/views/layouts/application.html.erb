@@ -19,8 +19,9 @@
           <%= link_to "", root_path, :class => "ms-logo" %>
 
           <ul class="nav">
-              <li><%= link_to "Store reviews", root_path %></li>
-              <li><%= link_to "Store performance", performance_path %></li>
+              <li <%= 'class=active' if current_page?(root_path) %>><%= link_to "Store Reviews", root_path %></li>
+              <li <%= 'class=active' if current_page?(performance_path) %>><%= link_to "Store Performance", performance_path %></li>
+              <li <%= 'class=active' if current_page?(ranking_path) %>><%= link_to "Store Ranking", ranking_path %></li>
           </ul>
       </nav>
     </header>
