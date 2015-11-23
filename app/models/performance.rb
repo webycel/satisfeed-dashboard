@@ -40,6 +40,11 @@ class Performance < ActiveRecord::Base
 					bestBadCounter = badCounter
 					bestStore = buildStoreHash(key, store, goodCounter, badCounter, goodPercentage)
 				end
+			elsif filter == "difference"
+				if (goodCounter - badCounter >= bestGoodCounter && experience == "good") || (goodCounter - badCounter < bestGoodCounter && experience == "bad")
+					bestGoodCounter = goodCounter - badCounter
+					bestStore = buildStoreHash(key, store, goodCounter, badCounter, goodPercentage)
+				end
 			end
 		end
 
