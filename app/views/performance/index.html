@@ -1,71 +1,79 @@
-<div class="row performance">
+<div class="performance">
 
 	<% if @stores.length > 0 %>
 
-		<dl class="small-12 columns sub-nav">
-			<dt>Filter: </dt>
-			<dd class="<%= 'active' if @filter == 'amount' %>">
-				<%= link_to "Amount", performance_path(:controller => "performance") %>
-			</dd>
-			<dd class="<%= 'active' if @filter == 'percentage' %>">
-				<%= link_to "Percentage", performance_path(:controller => "performance", :filter => "percentage") %>
-			</dd>
-			<dd class="<%= 'active' if @filter == 'difference' %>">
-				<%= link_to "Difference", performance_path(:controller => "performance", :filter => "difference") %>
-			</dd>
-		</dl>
-
-		<section class="small-12 columns">
-
-			<h2 class="full-title"><span>Best performing store</span></h2>
-
-			<div class="small-5 small-centered columns">
-				<ul class="pricing-table store-performance">
-					<li class="title"></li>
-					<li class="price"><%= @bestStore["storeID"] %></li>
-					<li class="description"><%= @bestStore["experiences"].length %> reviews</li>
-					<li class="bullet-item">
-						<%= @bestStore["good"] %> <img src="<%= image_url('good.svg') %>" width="32" alt="good experience" />
-						<% if @bestStore["percentage"] %>
-							<span class="percentage"><%= @bestStore["percentage"].to_s + "%" %></span>
-						<% end %>
-					</li>
-					<li class="bullet-item">
-						<%= @bestStore["bad"] %> <img src="<%= image_url('bad.svg') %>" width="32" alt="bad experience" />
-						<% if @bestStore["percentage"] %>
-							<span class="percentage"><%= (100 - @bestStore["percentage"]).round(1).to_s + "%" %></span>
-						<% end %>
-					</li>
-				</ul>
+		<div class="row">
+			<div class="small-11 small-centered columns">
+				<dl class="sub-nav">
+					<dt>Filter: </dt>
+					<dd class="<%= 'active' if @filter == 'amount' %>">
+						<%= link_to "Amount", performance_path(:controller => "performance") %>
+					</dd>
+					<dd class="<%= 'active' if @filter == 'percentage' %>">
+						<%= link_to "Percentage", performance_path(:controller => "performance", :filter => "percentage") %>
+					</dd>
+					<dd class="<%= 'active' if @filter == 'difference' %>">
+						<%= link_to "Difference", performance_path(:controller => "performance", :filter => "difference") %>
+					</dd>
+				</dl>
 			</div>
+		</div>
 
-		</section>
+		<div class="row">
 
-		<section class="small-12 columns">
+			<section class="small-6 columns">
 
-			<h2 class="full-title"><span>Worst performing store</span></h2>
+				<h2 class="title"><span>Best performing store</span></h2>
 
-			<div class="small-5 small-centered columns">
-				<ul class="pricing-table store-performance">
-					<li class="title"></li>
-					<li class="price"><%= @worstStore["storeID"] %></li>
-					<li class="description"><%= @worstStore["experiences"].length %> reviews</li>
-					<li class="bullet-item">
-						<%= @worstStore["good"] %> <img src="<%= image_url('good.svg') %>" width="32" alt="good experience" />
-						<% if @worstStore["percentage"] %>
-							<span class="percentage"><%= @worstStore["percentage"].to_s + "%" %></span>
-						<% end %>
-					</li>
-					<li class="bullet-item">
-						<%= @worstStore["bad"] %> <img src="<%= image_url('bad.svg') %>" width="32" alt="bad experience" />
-						<% if @worstStore["percentage"] %>
-							<span class="percentage"><%= (100 - @worstStore["percentage"]).round(1).to_s + "%" %></span>
-						<% end %>
-					</li>
-				</ul>
-			</div>
+				<div class="small-10 small-centered columns">
+					<ul class="pricing-table store-performance">
+						<li class="title"></li>
+						<li class="price"><%= @bestStore["storeID"] %></li>
+						<li class="description"><%= @bestStore["experiences"].length %> reviews</li>
+						<li class="bullet-item">
+							<%= @bestStore["good"] %> <img src="<%= image_url('good.svg') %>" width="32" alt="good experience" />
+							<% if @bestStore["percentage"] %>
+								<span class="percentage"><%= @bestStore["percentage"].to_s + "%" %></span>
+							<% end %>
+						</li>
+						<li class="bullet-item">
+							<%= @bestStore["bad"] %> <img src="<%= image_url('bad.svg') %>" width="32" alt="bad experience" />
+							<% if @bestStore["percentage"] %>
+								<span class="percentage"><%= (100 - @bestStore["percentage"]).round(1).to_s + "%" %></span>
+							<% end %>
+						</li>
+					</ul>
+				</div>
 
-		</section>
+			</section>
+
+			<section class="small-6 columns">
+
+				<h2 class="title"><span>Worst performing store</span></h2>
+
+				<div class="small-10 small-centered columns">
+					<ul class="pricing-table store-performance">
+						<li class="title"></li>
+						<li class="price"><%= @worstStore["storeID"] %></li>
+						<li class="description"><%= @worstStore["experiences"].length %> reviews</li>
+						<li class="bullet-item">
+							<%= @worstStore["good"] %> <img src="<%= image_url('good.svg') %>" width="32" alt="good experience" />
+							<% if @worstStore["percentage"] %>
+								<span class="percentage"><%= @worstStore["percentage"].to_s + "%" %></span>
+							<% end %>
+						</li>
+						<li class="bullet-item">
+							<%= @worstStore["bad"] %> <img src="<%= image_url('bad.svg') %>" width="32" alt="bad experience" />
+							<% if @worstStore["percentage"] %>
+								<span class="percentage"><%= (100 - @worstStore["percentage"]).round(1).to_s + "%" %></span>
+							<% end %>
+						</li>
+					</ul>
+				</div>
+
+			</section>
+
+		</div>
 
 	<% else %>
 
