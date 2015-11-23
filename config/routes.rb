@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root 'dashboard#index'
 
   get 'store' => 'dashboard#store', as: :store
+  get 'performance' => 'performance#index', as: :performance
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -1,0 +1,25 @@
+// Place all the styles related to the Performance controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.performance {
+	.sub-nav {
+		margin-top: 1em;
+	}
+
+	.store-performance {
+		.bullet-item {
+			font-size: 1.25em;
+
+			img {
+				margin: -4px 0 0 0.4em;
+			}
+		}
+	}
+
+	.percentage {
+		display: inline-block;
+		width: 100%;
+		margin-top: 0.5em;
+		font-size: 0.75em;
+	}
+}

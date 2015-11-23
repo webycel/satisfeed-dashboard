@@ -105,7 +105,7 @@
 								<%= s['time'].split[4] %>
 							</div>
 							<div class="reason small-10 columns">
-								<% if s['extraInfo'].length > 0 %>
+								<% if s['extraInfo'] && s['extraInfo'].length > 0 %>
 									<p><%= s['extraInfo'] %></p>
 								<% end %>
 								<% if s['why'] && s['why'].any? %>

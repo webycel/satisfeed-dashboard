@@ -9,7 +9,6 @@ class Store < ActiveRecord::Base
 	end
 
 	def self.get_by_experience experiences, rating
-		filtered_list = Array.new
 		experiences.select { |key, experience| experience["experience"] == rating  }
 	end
 
