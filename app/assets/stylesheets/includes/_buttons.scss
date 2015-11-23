@@ -10,4 +10,15 @@
 			color: $black;
 		}
 	}
+
+	.sub-nav {
+		dd.active, dd.active a {
+			background: $black;
+			color: $white;
+			cursor: pointer;
+		}
+		dd.active a:hover {
+			background: $black;
+		}
+	}
 }
