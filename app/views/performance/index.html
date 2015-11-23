@@ -33,7 +33,7 @@
 					<li class="bullet-item">
 						<%= @bestStore["bad"] %> <img src="<%= image_url('bad.svg') %>" width="32" alt="bad experience" />
 						<% if @bestStore["percentage"] %>
-							<span class="percentage"><%= (100 - @bestStore["percentage"]).to_s + "%" %></span>
+							<span class="percentage"><%= (100 - @bestStore["percentage"]).round(1).to_s + "%" %></span>
 						<% end %>
 					</li>
 				</ul>
@@ -59,7 +59,7 @@
 					<li class="bullet-item">
 						<%= @worstStore["bad"] %> <img src="<%= image_url('bad.svg') %>" width="32" alt="bad experience" />
 						<% if @worstStore["percentage"] %>
-							<span class="percentage"><%= (100 - @worstStore["percentage"]).to_s + "%" %></span>
+							<span class="percentage"><%= (100 - @worstStore["percentage"]).round(1).to_s + "%" %></span>
 						<% end %>
 					</li>
 				</ul>

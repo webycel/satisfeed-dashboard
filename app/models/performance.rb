@@ -58,7 +58,7 @@ class Performance < ActiveRecord::Base
 			bestStore["experiences"] = experiences
 			bestStore["good"] = good
 			bestStore["bad"] = bad
-			bestStore["percentage"] = percentage
+			bestStore["percentage"] = percentage.round(1)
 			bestStore
 		end
 
