@@ -98,7 +98,7 @@
 				<% if @store.length > 0 %>
 					<ul class="reviews">
 					<% @store.each do |_, store| %>
-						<%= render partial: "stores/store", locals: { store: store} %>
+						<%= render partial: "store", locals: { store: store} %>
 					<% end %>
 					</ul>
 				<% else %>
