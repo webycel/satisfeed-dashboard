@@ -1,4 +1,4 @@
-class DashboardController < ApplicationController
+class StoreController < ApplicationController
 
 	def index
 
@@ -27,7 +27,7 @@ class DashboardController < ApplicationController
 			@store = Store.filter_by_date("yesterday", @store)
 		end
 
-		render "dashboard/index"
+		render "store/index"
 	end
 
 end
