@@ -28,18 +28,18 @@
 				<div class="small-10 small-centered columns">
 					<ul class="pricing-table store-performance">
 						<li class="title"></li>
-						<li class="price"><%= @bestStore["storeID"] %></li>
-						<li class="description"><%= @bestStore["experiences"].length %> reviews</li>
+						<li class="price"><%= @best_store["storeID"] %></li>
+						<li class="description"><%= @best_store["experiences"].length %> reviews</li>
 						<li class="bullet-item">
-							<%= @bestStore["good"] %> <img src="<%= image_url('good.svg') %>" width="32" alt="good experience" />
-							<% if @bestStore["percentage"] %>
-								<span class="percentage"><%= @bestStore["percentage"].to_s + "%" %></span>
+							<%= @best_store["good"] %> <img src="<%= image_url('good.svg') %>" width="32" alt="good experience" />
+							<% if @best_store["percentage"] %>
+								<span class="percentage"><%= @best_store["percentage"].to_s + "%" %></span>
 							<% end %>
 						</li>
 						<li class="bullet-item">
-							<%= @bestStore["bad"] %> <img src="<%= image_url('bad.svg') %>" width="32" alt="bad experience" />
-							<% if @bestStore["percentage"] %>
-								<span class="percentage"><%= (100 - @bestStore["percentage"]).round(1).to_s + "%" %></span>
+							<%= @best_store["bad"] %> <img src="<%= image_url('bad.svg') %>" width="32" alt="bad experience" />
+							<% if @best_store["percentage"] %>
+								<span class="percentage"><%= (100 - @best_store["percentage"]).round(1).to_s + "%" %></span>
 							<% end %>
 						</li>
 					</ul>
@@ -54,18 +54,18 @@
 				<div class="small-10 small-centered columns">
 					<ul class="pricing-table store-performance">
 						<li class="title"></li>
-						<li class="price"><%= @worstStore["storeID"] %></li>
-						<li class="description"><%= @worstStore["experiences"].length %> reviews</li>
+						<li class="price"><%= @worst_store["storeID"] %></li>
+						<li class="description"><%= @worst_store["experiences"].length %> reviews</li>
 						<li class="bullet-item">
-							<%= @worstStore["good"] %> <img src="<%= image_url('good.svg') %>" width="32" alt="good experience" />
-							<% if @worstStore["percentage"] %>
-								<span class="percentage"><%= @worstStore["percentage"].to_s + "%" %></span>
+							<%= @worst_store["good"] %> <img src="<%= image_url('good.svg') %>" width="32" alt="good experience" />
+							<% if @worst_store["percentage"] %>
+								<span class="percentage"><%= @worst_store["percentage"].to_s + "%" %></span>
 							<% end %>
 						</li>
 						<li class="bullet-item">
-							<%= @worstStore["bad"] %> <img src="<%= image_url('bad.svg') %>" width="32" alt="bad experience" />
-							<% if @worstStore["percentage"] %>
-								<span class="percentage"><%= (100 - @worstStore["percentage"]).round(1).to_s + "%" %></span>
+							<%= @worst_store["bad"] %> <img src="<%= image_url('bad.svg') %>" width="32" alt="bad experience" />
+							<% if @worst_store["percentage"] %>
+								<span class="percentage"><%= (100 - @worst_store["percentage"]).round(1).to_s + "%" %></span>
 							<% end %>
 						</li>
 					</ul>

@@ -1,11 +1,11 @@
 class PerformanceController < ApplicationController
 
 	def index
-		@stores = Performance.allStores().body
+		@stores = Performance.all_stores().body
 		@filter = params["filter"] || "amount"
 
-		@bestStore = Performance.getBestStore(@stores, @filter, "good")
-		@worstStore = Performance.getBestStore(@stores, @filter, "bad")
+		@best_store = Performance.get_best_store(@stores, @filter, "good")
+		@worst_store = Performance.get_best_store(@stores, @filter, "bad")
 	end
 
 end

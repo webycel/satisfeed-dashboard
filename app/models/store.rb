@@ -5,7 +5,7 @@ class Store < ActiveRecord::Base
 	firebase = Firebase::Client.new(base_uri)
 
 	scope :get, -> (store_id) do
-		firebase.get("stores/" + store_id)
+		firebase.get("stores/" + (CGI.escape store_id))
 	end
 
 	def self.get_by_experience(experiences, rating)
