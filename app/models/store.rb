@@ -8,11 +8,11 @@ class Store < ActiveRecord::Base
 		firebase.get("stores/" + store_id)
 	end
 
-	def self.get_by_experience experiences, rating
-		experiences.select { |key, experience| experience["experience"] == rating  }
+	def self.get_by_experience(experiences, rating)
+		experiences.select { |_, experience| experience["experience"] == rating  }
 	end
 
-	def self.filter_by_date time, experiences
+	def self.filter_by_date(time, experiences)
 		if time == "today"
 			experiences.select do |key, experience|
 				experience["time"].to_date.today?
