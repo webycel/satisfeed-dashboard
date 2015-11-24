@@ -1,5 +1,6 @@
 class Experience
   attr_accessor :id
+  attr_accessor :description
   attr_accessor :extra_info
   attr_accessor :created_at
   attr_accessor :reasons

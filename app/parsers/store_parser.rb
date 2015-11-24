@@ -17,6 +17,7 @@ class StoreParser
       Experience.new.tap do |object|
         object.id = key
         object.extra_info = experience["extraInfo"]
+        object.description = experience["experience"]
         object.created_at = experience["time"]
         object.reasons = parse_reasons(experience["why"]) if experience["why"]
       end
