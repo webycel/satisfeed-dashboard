@@ -1,0 +1,21 @@
+<li class="row">
+  <div class="info small-2 columns">
+    <img src="<%= image_url(store['experience'] + '.svg') %>" width="100%" alt="<%= store['experience'] %> experience" />
+    <%= store['time'].to_date %>
+    <%= store['time'].split[4] %>
+  </div>
+  <div class="reason small-10 columns">
+    <% if store['extraInfo'] && store['extraInfo'].length > 0 %>
+      <p><%= store['extraInfo'] %></p>
+    <% end %>
+    <% if store['why'] && store['why'].any? %>
+      <br>
+      <b>Reasons:</b>
+      <ul>
+      <% store['why'].each do |why| %>
+        <li><%= why %></li>
+      <% end %>
+      </ul>
+    <% end %>
+  </div>
+</li>
