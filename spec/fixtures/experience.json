@@ -1,0 +1,24 @@
+{
+  "experiences": [
+    {
+      "experience":"bad",
+      "extraInfo": "so so bad"
+    },
+    {
+      "experience":"bad",
+      "extraInfo": "so so bad"
+    },
+    {
+      "experience":"good",
+      "extraInfo": "so so good"
+    },
+    {
+      "experience":"good",
+      "extraInfo": "so so good"
+    },
+    {
+      "experience":"good",
+      "extraInfo": "so so good"
+    }
+  ]
+}

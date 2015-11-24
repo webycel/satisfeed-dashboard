@@ -9,7 +9,7 @@ class Store < ActiveRecord::Base
 	end
 
 	def self.get_by_experience(experiences, rating)
-		experiences.select { |_, experience| experience["experience"] == rating  }
+		experiences.select { |experience| experience["experience"] == rating  }
 	end
 
 	def self.filter_by_date(time, experiences)
