@@ -4,17 +4,21 @@ class Performance < ActiveRecord::Base
 
 	firebase = Firebase::Client.new(base_uri)
 
-	scope :all_stores, -> () do
-		firebase.get("stores")
-	end
+	scope :all_stores, -> () { firebase.get("stores") }
 
-	def self.get_best_store stores, filter, experience
+	def self.get_best_store(stores, filter, experience)
+		# Rails.logger.info("stores: #{stores.inspect}")
 		best_store = Hash.new
 
 		best_good_counter = 0
 		best_bad_counter = 0
 
+		# parsed_stores = StoresParser.parse(stores)
+
 		stores.each do |key, store|
+			Rails.logger.info("stores: #{stores.inspect}")
+			# create_store
+
 			good_counter = 0
 			good_percentage = 0
 			bad_counter = 0
@@ -52,7 +56,7 @@ class Performance < ActiveRecord::Base
 	end
 
 	private
-		def self.build_store_hash key, experiences, good, bad, percentage
+		def self.build_store_hash(key, experiences, good, bad, percentage)
 			best_store = Hash.new
 			best_store["storeID"] = key
 			best_store["experiences"] = experiences
@@ -60,6 +64,10 @@ class Performance < ActiveRecord::Base
 			best_store["bad"] = bad
 			best_store["percentage"] = percentage.round(1)
 			best_store
+		end
+
+		def create_store
+			Store.new(key)
 		end
 
 end

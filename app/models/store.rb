@@ -1,12 +1,15 @@
-class Store < ActiveRecord::Base
+class Store
 
 	base_uri = 'https://customersatisfaction.firebaseio.com/'
 
 	firebase = Firebase::Client.new(base_uri)
 
-	scope :get, -> (store_id) do
+	def self.show(store_id)
 		firebase.get("stores/" + (CGI.escape store_id))
-	end
+	end 
+
+	attr_accessor :name
+  attr_accessor :experiences
 
 	def self.get_by_experience(experiences, rating)
 		experiences.select { |_, experience| experience["experience"] == rating }

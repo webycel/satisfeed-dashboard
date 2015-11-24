@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   get 'store' => 'store#store', as: :store
   get 'performance' => 'performance#index', as: :performance
   get 'ranking' => 'ranking#index', as: :ranking
+  # get 'performance(/:filter)', to: 'performance#index', as: :performance, defaults: { filter: "amount" }
 
 end
