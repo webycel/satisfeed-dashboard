@@ -4,62 +4,62 @@ class Performance < ActiveRecord::Base
 
 	firebase = Firebase::Client.new(base_uri)
 
-	scope :allStores, -> () do
+	scope :all_stores, -> () do
 		firebase.get("stores")
 	end
 
-	def self.getBestStore stores, filter, experience
-		bestStore = Hash.new
+	def self.get_best_store stores, filter, experience
+		best_store = Hash.new
 
-		bestGoodCounter = 0
-		bestBadCounter = 0
+		best_good_counter = 0
+		best_bad_counter = 0
 
 		stores.each do |key, store|
-			goodCounter = 0
-			goodPercentage = 0
-			badCounter = 0
-			badPercentage = 0
+			good_counter = 0
+			good_percentage = 0
+			bad_counter = 0
+			bad_percentage = 0
 
 			store.each do |k, s|
-				goodCounter += 1 if s["experience"] == "good"
-				badCounter += 1 if s["experience"] == "bad"
+				good_counter += 1 if s["experience"] == "good"
+				bad_counter += 1 if s["experience"] == "bad"
 			end
 
-			goodPercentage = (100.to_f / (goodCounter + badCounter)) * goodCounter
-			badPercentage = 100.to_f - goodPercentage
+			good_percentage = (100.to_f / (good_counter + bad_counter)) * good_counter
+			bad_percentage = 100.to_f - good_percentage
 
 			if filter == "percentage"
-				if (goodPercentage >= bestGoodCounter && experience == "good") || (badPercentage >= bestBadCounter && experience == "bad")
-					bestGoodCounter = goodPercentage
-					bestBadCounter = badPercentage
-					bestStore = buildStoreHash(key, store, goodCounter, badCounter, bestGoodCounter)
+				if (good_percentage >= best_good_counter && experience == "good") || (bad_percentage >= best_bad_counter && experience == "bad")
+					best_good_counter = good_percentage
+					best_bad_counter = bad_percentage
+					best_store = build_store_hash(key, store, good_counter, bad_counter, best_good_counter)
 				end
 			elsif filter == "amount"
-				if (goodCounter >= bestGoodCounter && experience == "good") || (badCounter >= bestBadCounter && experience == "bad")
-					bestGoodCounter = goodCounter
-					bestBadCounter = badCounter
-					bestStore = buildStoreHash(key, store, goodCounter, badCounter, goodPercentage)
+				if (good_counter >= best_good_counter && experience == "good") || (bad_counter >= best_bad_counter && experience == "bad")
+					best_good_counter = good_counter
+					best_bad_counter = bad_counter
+					best_store = build_store_hash(key, store, good_counter, bad_counter, good_percentage)
 				end
 			elsif filter == "difference"
-				if (goodCounter - badCounter >= bestGoodCounter && experience == "good") || (goodCounter - badCounter < bestGoodCounter && experience == "bad")
-					bestGoodCounter = goodCounter - badCounter
-					bestStore = buildStoreHash(key, store, goodCounter, badCounter, goodPercentage)
+				if (good_counter - bad_counter >= best_good_counter && experience == "good") || (good_counter - bad_counter < best_good_counter && experience == "bad")
+					best_good_counter = good_counter - bad_counter
+					best_store = build_store_hash(key, store, good_counter, bad_counter, good_percentage)
 				end
 			end
 		end
 
-		bestStore
+		best_store
 	end
 
 	private
-		def self.buildStoreHash key, experiences, good, bad, percentage
-			bestStore = Hash.new
-			bestStore["storeID"] = key
-			bestStore["experiences"] = experiences
-			bestStore["good"] = good
-			bestStore["bad"] = bad
-			bestStore["percentage"] = percentage.round(1)
-			bestStore
+		def self.build_store_hash key, experiences, good, bad, percentage
+			best_store = Hash.new
+			best_store["storeID"] = key
+			best_store["experiences"] = experiences
+			best_store["good"] = good
+			best_store["bad"] = bad
+			best_store["percentage"] = percentage.round(1)
+			best_store
 		end
 
 end
