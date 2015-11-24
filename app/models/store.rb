@@ -9,18 +9,26 @@ class Store < ActiveRecord::Base
 	end
 
 	def self.get_by_experience(experiences, rating)
-		experiences.select { |_, experience| experience["experience"] == rating  }
+		experiences.select { |_, experience| experience["experience"] == rating }
 	end
 
 	def self.filter_by_date(time, experiences)
 		if time == "today"
-			experiences.select do |_, experience|
-				experience["time"].to_date.today?
-			end
+			experiences_from_today(experiences)
 		elsif time == "yesterday"
-			experiences.select do |_, experience|
-				experience["time"].to_date.advance(:days => 1).today?
-			end
+			experiences_from_yesterday(experiences)
+		end
+	end
+
+	private
+
+	def self.experiences_from_today(experiences)
+		experiences.select {| _, experience| experience["time"].to_date.today? }
+	end
+
+	def self.experiences_from_yesterday(experiences)
+		experiences.select do |_, experience|
+			experience["time"].to_date.advance(:days => 1).today?
 		end
 	end
 
