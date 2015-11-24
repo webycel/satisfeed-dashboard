@@ -68,12 +68,12 @@
 
 	<section class="store small-9 columns">
 
-		<% if !@store_id %>
+		<% unless @store_id %>
 			<p class="panel text-center">
 				Please enter a store ID to view the reviews for a specific store.
 			</p>
 		<% else %>
-			<% if !@store %>
+			<% unless @store %>
 				<p class="panel text-center">
 					Sorry, couldn't find any data with this Store ID.
 				</p>
@@ -97,28 +97,8 @@
 
 				<% if @store.length > 0 %>
 					<ul class="reviews">
-					<% @store.each do |key, s| %>
-						<li class="row">
-							<div class="info small-2 columns">
-								<img src="<%= image_url(s['experience'] + '.svg') %>" width="100%" alt="<%= s['experience'] %> experience" />
-								<%= s['time'].to_date %>
-								<%= s['time'].split[4] %>
-							</div>
-							<div class="reason small-10 columns">
-								<% if s['extraInfo'] && s['extraInfo'].length > 0 %>
-									<p><%= s['extraInfo'] %></p>
-								<% end %>
-								<% if s['why'] && s['why'].any? %>
-									<br>
-									<b>Reasons:</b>
-									<ul>
-									<% s['why'].each do |why| %>
-										<li><%= why %></li>
-									<% end %>
-									</ul>
-								<% end %>
-							</div>
-						</li>
+					<% @store.each do |_, store| %>
+						<%= render partial: "store", locals: { store: store} %>
 					<% end %>
 					</ul>
 				<% else %>

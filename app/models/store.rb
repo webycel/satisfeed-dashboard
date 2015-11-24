@@ -8,19 +8,27 @@ class Store < ActiveRecord::Base
 		firebase.get("stores/" + (CGI.escape store_id))
 	end
 
-	def self.get_by_experience experiences, rating
-		experiences.select { |key, experience| experience["experience"] == rating  }
+	def self.get_by_experience(experiences, rating)
+		experiences.select { |_, experience| experience["experience"] == rating }
 	end
 
-	def self.filter_by_date time, experiences
+	def self.filter_by_date(time, experiences)
 		if time == "today"
-			experiences.select do |key, experience|
-				experience["time"].to_date.today?
-			end
+			experiences_from_today(experiences)
 		elsif time == "yesterday"
-			experiences.select do |key, experience|
-				experience["time"].to_date.advance(:days => 1).today?
-			end
+			experiences_from_yesterday(experiences)
+		end
+	end
+
+	private
+
+	def self.experiences_from_today(experiences)
+		experiences.select {| _, experience| experience["time"].to_date.today? }
+	end
+
+	def self.experiences_from_yesterday(experiences)
+		experiences.select do |_, experience|
+			experience["time"].to_date.advance(:days => 1).today?
 		end
 	end
 
