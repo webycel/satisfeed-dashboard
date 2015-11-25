@@ -24,11 +24,11 @@ class Store
 
 	### CLASS METHODS
 	def good_experiences
-		experiences.select(&:good_experience?).count / experiences.count
+		experiences.select(&:good_experience?)
 	end
 
 	def bad_experiences
-		experiences.select(&:bad_experience?).count / experiences.count
+		experiences.select(&:bad_experience?)
 	end
 
 	private

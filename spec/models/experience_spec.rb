@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Experience do
-  let(:subject) { Experience.new }
+  subject {described_class.new}
 
   describe "#good_experience?" do
     it "indicates if the experience is good" do
