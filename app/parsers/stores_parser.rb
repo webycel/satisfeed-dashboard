@@ -7,7 +7,7 @@ class StoresParser
 
   private
   def self.parse_stores(data)
-    data.map { |key, store_data| StoreParser.parse_store(key, store_data) }
+    data.map { |key, store_data| StoreParser.new.parse_store(key, store_data) }
   end
 
 end
