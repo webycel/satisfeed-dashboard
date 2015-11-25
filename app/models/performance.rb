@@ -13,8 +13,9 @@ class Performance < ActiveRecord::Base
 		best_bad_counter = 0
 
 		parsed_stores = StoresParser.parse(stores)
+		raise parsed_stores.first.experiences.count.inspect
 
-		stores.each do |key, store|
+		parsed_stores.each do |key, store|
 
 			good_counter = 0
 			good_percentage = 0

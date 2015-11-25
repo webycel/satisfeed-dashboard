@@ -2,14 +2,13 @@ class Store
 
 	base_uri = 'https://customersatisfaction.firebaseio.com/'
 
-	firebase = Firebase::Client.new(base_uri)
+	attr_accessor :name
+  attr_accessor :experiences
 
+  ### INSTANCE METHODS
 	def self.show(store_id)
 		firebase.get("stores/" + (CGI.escape store_id))
 	end 
-
-	attr_accessor :name
-  attr_accessor :experiences
 
 	def self.get_by_experience(experiences, rating)
 		experiences.select { |_, experience| experience["experience"] == rating }
@@ -23,6 +22,15 @@ class Store
 		end
 	end
 
+	### CLASS METHODS
+	def good_experiences
+		experiences.select(&:good_experience?).count / experiences.count
+	end
+
+	def bad_experiences
+		experiences.select(&:bad_experience?).count / experiences.count
+	end
+
 	private
 
 	def self.experiences_from_today(experiences)
@@ -33,6 +41,10 @@ class Store
 		experiences.select do |_, experience|
 			experience["time"].to_date.advance(:days => 1).today?
 		end
+	end
+
+	def firebase
+		@firebase ||= Firebase::Client.new(base_uri)
 	end
 
 end
