@@ -26,7 +26,7 @@ class Store
 	def self.ranked_by_percentage
 		StoresParser.parse(@firebase.get("stores").body).map do |store|
 			[store, store.good_percentage]
-		end.sort_by{|store, percentage| percentage}
+		end.sort_by{|store, percentage| percentage}.reverse
 	end
 
 	### CLASS METHODS

@@ -1,0 +1,20 @@
+%div{class: "small-10 small-centered columns"}
+  %ul{class: "pricing-table store-performance"}
+    %li.title
+    %li.price 
+      =store.name
+    %li.description
+      =store.experiences.count
+      reviews
+    %li.bullet-item
+      =store.good_experiences.count
+      %img{src: image_url('good.svg'), width: "32", alt: "good experience"}
+      %span.percentage
+        =store.good_percentage
+        \%
+    %li.bullet-item
+      =store.bad_experiences.count
+      %img{src: image_url('bad.svg'), width: "32", alt: "bad experience"}
+      %span.percentage
+        =store.bad_percentage
+        \%

@@ -7,6 +7,7 @@
           <th class="title">Reviews</th>
           <th class="title"><img src="<%= image_url('good.svg') %>" width="32" alt="good experience" /></th>
           <th class="title"><img src="<%= image_url('bad.svg') %>" width="32" alt="bad experience" /></th>
+          <th class="title">Percentage</th>
         </tr>
       </thead>
       <tbody>
@@ -16,6 +17,7 @@
             <td class="description"><%= store.first.experiences.count %></td>
             <td class="description"><%= store.first.good_experiences.count %></td>
             <td class="description"><%= store.first.bad_experiences.count %></td>
+            <td class="description"><%= store.last %></td>
           </tr>
         <% end %>
       </tbody>

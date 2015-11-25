@@ -1,7 +1,5 @@
 <div class="performance">
-
 	<% if @stores.length > 0 %>
-
 		<div class="row">
 			<div class="small-11 small-centered columns">
 				<dl class="sub-nav">
@@ -18,70 +16,19 @@
 				</dl>
 			</div>
 		</div>
-
 		<div class="row">
-
 			<section class="small-6 columns">
-
 				<h2 class="title"><span>Best performing store</span></h2>
-
-				<div class="small-10 small-centered columns">
-					<ul class="pricing-table store-performance">
-						<li class="title"></li>
-						<li class="price"><%= @best_store.first.name %></li>
-						<li class="description"><%= @best_store.first.experiences.count %> reviews</li>
-						<li class="bullet-item">
-							<%= @best_store.first.good_experiences.count %> <img src="<%= image_url('good.svg') %>" width="32" alt="good experience" />
-							<% if @best_store.first.good_percentage %>
-								<span class="percentage"><%= "#{@best_store.first.good_percentage}%" %></span>
-							<% end %>
-						</li>
-						<li class="bullet-item">
-							<%= @best_store.first.bad_experiences.count %> <img src="<%= image_url('bad.svg') %>" width="32" alt="bad experience" />
-							<% if @best_store.first.good_percentage %>
-								<span class="percentage"><%= "#{@best_store.first.good_percentage}%" %></span>
-							<% end %>
-						</li>
-					</ul>
-				</div>
-
+				<%= render partial: 'reviews_panel', locals: { store: @best_store, quality: "good"} %>
 			</section>
-
 			<section class="small-6 columns">
-
 				<h2 class="title"><span>Worst performing store</span></h2>
-
-				<div class="small-10 small-centered columns">
-					<ul class="pricing-table store-performance">
-						<li class="title"></li>
-						<li class="price"><%= @worst_store.first.name %></li>
-						<li class="description"><%= @worst_store.first.experiences.count %> reviews</li>
-						<li class="bullet-item">
-							<%= @worst_store.first.good_experiences.count %> <img src="<%= image_url('good.svg') %>" width="32" alt="good experience" />
-							<% if @worst_store.first.bad_percentage %>
-								<span class="percentage"><%= "#{@worst_store.first.bad_percentage}%" %></span>
-							<% end %>
-						</li>
-						<li class="bullet-item">
-							<%= @worst_store.first.bad_experiences.count %> <img src="<%= image_url('bad.svg') %>" width="32" alt="bad experience" />
-							<% if @worst_store.first.bad_percentage %>
-								<span class="percentage"><%= "#{@worst_store.first.bad_percentage}%" %></span>
-							<% end %>
-						</li>
-					</ul>
-				</div>
-
+				<%= render partial: 'reviews_panel', locals: { store: @worst_store, quality: "bad"} %>
 			</section>
-
 		</div>
-
 	<% else %>
-
 		<p class="panel text-center">
 			Sorry, there are currently no performance reports.
 		</p>
-
 	<% end %>
-
-
 </div>

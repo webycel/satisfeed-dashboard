@@ -4,6 +4,7 @@ gem 'rails', '4.2.4'
 
 gem 'firebase'
 gem 'foundation-rails'
+gem 'haml'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
 gem 'sass-rails', '~> 5.0'
