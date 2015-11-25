@@ -4,10 +4,12 @@ RSpec.describe Performance do
 
   describe ".get_best_store" do
     let(:stores) { JSON.parse(fixture("stores.json").read) }
+    let(:store) { double(:store) }
 
-    it "returns the store with the highest percentage of good ratings" do
-      expect(Performance.get_best_store(stores, "amount", "good" )["good"]).to eq 0
-      expect(Performance.get_best_store(stores, "amount", "bad" )["bad"]).to eq 0
+    context "when filtered by percentage" do
+      it "returns the store with the highest percentage of good ratings" do
+        expect(Performance.get_best_store("percentage" )).to eq store
+      end
     end
   end
 

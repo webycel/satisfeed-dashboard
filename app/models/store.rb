@@ -1,6 +1,7 @@
 class Store
 
-	base_uri = 'https://customersatisfaction.firebaseio.com/'
+	@base_uri = 'https://customersatisfaction.firebaseio.com/'
+	@firebase ||= Firebase::Client.new(@base_uri)
 
 	attr_accessor :name
   attr_accessor :experiences
@@ -20,6 +21,12 @@ class Store
 		elsif time == "yesterday"
 			experiences_from_yesterday(experiences)
 		end
+	end
+
+	def self.ranked_by_percentage
+		StoresParser.parse(@firebase.get("stores").body).map do |store|
+			[store, store.good_percentage]
+		end.sort_by{|store, percentage| percentage}
 	end
 
 	### CLASS METHODS
@@ -56,10 +63,6 @@ class Store
 		experiences.select do |_, experience|
 			experience["time"].to_date.advance(:days => 1).today?
 		end
-	end
-
-	def firebase
-		@firebase ||= Firebase::Client.new(base_uri)
 	end
 
 end

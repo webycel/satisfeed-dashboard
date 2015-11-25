@@ -1,0 +1,28 @@
+<div class="performance">
+  <% if @stores.length > 0 %>
+    <table>
+      <thead>
+        <tr class="row">
+          <th class="title">Branch</th>
+          <th class="title">Reviews</th>
+          <th class="title"><img src="<%= image_url('good.svg') %>" width="32" alt="good experience" /></th>
+          <th class="title"><img src="<%= image_url('bad.svg') %>" width="32" alt="bad experience" /></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @stores.each do |store| %>
+          <tr class="row">
+            <td class="description"><%= store.first.name %></td>
+            <td class="description"><%= store.first.experiences.count %></td>
+            <td class="description"><%= store.first.good_experiences.count %></td>
+            <td class="description"><%= store.first.bad_experiences.count %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p class="panel text-center">
+      Sorry, there are currently no performance reports.
+    </p>
+  <% end %>
+</div>
