@@ -29,8 +29,9 @@ RSpec.describe Store do
 
   describe "store experiences" do
     let(:good_experience) {double(:experience, good_experience?: true, bad_experience?: false)}
-    let(:bad_experience) {double(:experience, bad_experience?: true, good_experience?: false)}
-    let(:experiences) {[good_experience, bad_experience]}
+    let(:bad_experience1) {double(:experience, bad_experience?: true, good_experience?: false)}
+    let(:bad_experience2) {double(:experience, bad_experience?: true, good_experience?: false)}
+    let(:experiences) {[good_experience, bad_experience1, bad_experience2]}
     context "#good_experiences" do
       it "returns only the good experiences a store has received" do
         subject.experiences = experiences
@@ -41,7 +42,35 @@ RSpec.describe Store do
     context "#bad_experiences" do
       it "returns only the bad experiences a store has received" do
         subject.experiences = experiences
-        expect(subject.bad_experiences).to eq [bad_experience]
+        expect(subject.bad_experiences).to eq [bad_experience1, bad_experience2]
+      end
+    end
+
+    context "#good_percentage" do
+      it "calculates the percentage of good ratings" do
+        subject.experiences = experiences
+        expect(subject.good_percentage).to eq 33.33
+      end
+    end
+
+    context "#bad_percentage" do
+      it "calculates the percentage of bad ratings" do
+        subject.experiences = experiences
+        expect(subject.bad_percentage).to eq 66.67
+      end
+    end
+
+    context "#positive_ratings_difference" do
+      it "returns the difference between the number of good and bad experiences" do
+        subject.experiences = experiences
+        expect(subject.positive_ratings_difference).to eq -1
+      end
+    end
+
+    context "#negative_ratings_difference" do
+      it "returns the difference between the number of good and bad experiences" do
+        subject.experiences = experiences
+        expect(subject.negative_ratings_difference).to eq 1
       end
     end
   end

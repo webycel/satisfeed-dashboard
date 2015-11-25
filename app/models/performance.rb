@@ -1,59 +1,70 @@
 class Performance < ActiveRecord::Base
 
+	attr_accessor :parsed_stores
+
 	base_uri = 'https://customersatisfaction.firebaseio.com/'
 
 	firebase = Firebase::Client.new(base_uri)
 
 	scope :all_stores, -> () { firebase.get("stores") }
 
-	def self.get_best_store(stores, filter, experience)
-		best_store = Hash.new
-
-		best_good_counter = 0
-		best_bad_counter = 0
-
-		parsed_stores = StoresParser.parse(stores)
-		raise parsed_stores.first.experiences.count.inspect
-
-		parsed_stores.each do |key, store|
-
-			good_counter = 0
-			good_percentage = 0
-			bad_counter = 0
-			bad_percentage = 0
-
-			store.each do |k, s|
-				good_counter += 1 if s["experience"] == "good"
-				bad_counter += 1 if s["experience"] == "bad"
-			end
-
-			good_percentage = (100.to_f / (good_counter + bad_counter)) * good_counter
-			bad_percentage = 100.to_f - good_percentage
-
-			if filter == "percentage"
-				if (good_percentage >= best_good_counter && experience == "good") || (bad_percentage >= best_bad_counter && experience == "bad")
-					best_good_counter = good_percentage
-					best_bad_counter = bad_percentage
-					best_store = build_store_hash(key, store, good_counter, bad_counter, best_good_counter)
-				end
-			elsif filter == "amount"
-				if (good_counter >= best_good_counter && experience == "good") || (bad_counter >= best_bad_counter && experience == "bad")
-					best_good_counter = good_counter
-					best_bad_counter = bad_counter
-					best_store = build_store_hash(key, store, good_counter, bad_counter, good_percentage)
-				end
-			elsif filter == "difference"
-				if (good_counter - bad_counter >= best_good_counter && experience == "good") || (good_counter - bad_counter < best_good_counter && experience == "bad")
-					best_good_counter = good_counter - bad_counter
-					best_store = build_store_hash(key, store, good_counter, bad_counter, good_percentage)
-				end
-			end
+	def self.get_best_store(filter)
+		if filter == "percentage"
+			best_percentage_store
+		elsif filter == "amount"
+			best_amount_store
+		elsif filter == "difference"
+			positive_difference_store("good")
 		end
+	end
 
-		best_store
+	def self.get_worst_store(filter)
+		if filter == "percentage"
+			worst_percentage_store
+		elsif filter == "amount"
+			worst_amount_store
+		elsif filter == "difference"
+			negative_difference_store
+		end
 	end
 
 	private
+		def parsed_stores
+			@parsed_stores = StoresParser.parse(stores)
+		end
+
+		def best_percentage_store
+			sorted_stores = {}
+			parsed_stores.each{|store| sorted_stores[store] = store.good_percentage}
+			sorted_stores.sort_by{|store, percentage| percentage }.last
+		end
+
+		def best_amount_store
+			parsed_stores.map{|store| [store store.good_experiences.count]}.max_by{|store, count| count}
+		end
+
+		def positive_difference_store
+			parsed_stores.map do |store| 
+				store, store.positive_ratings_difference
+			end.max_by{|store, difference| difference}
+		end
+
+		def worst_percentage_store
+			sorted_stores = {}
+			parsed_stores.each{|store| sorted_stores[store] = store.bad_percentage}
+			sorted_stores.sort_by{|store, percentage| percentage }.last
+		end
+
+		def worst_amount_store
+			parsed_stores.map{|store| [store, store.bad_experiences.count]}.max_by{|store, count| count}
+		end
+
+		def negative_difference_store
+			parsed_stores.map do |store| 
+				store, store.negative_ratings_difference
+			end.max_by{|store, difference| difference}
+		end
+
 		def self.build_store_hash(key, experiences, good, bad, percentage)
 			best_store = Hash.new
 			best_store["storeID"] = key
@@ -62,10 +73,6 @@ class Performance < ActiveRecord::Base
 			best_store["bad"] = bad
 			best_store["percentage"] = percentage.round(1)
 			best_store
-		end
-
-		def create_store
-			Store.new(key)
 		end
 
 end

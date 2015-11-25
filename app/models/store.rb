@@ -31,8 +31,23 @@ class Store
 		experiences.select(&:bad_experience?)
 	end
 
-	private
+	def good_percentage
+		(good_experiences.count.to_f / experiences.count).round(4) * 100
+	end
 
+	def bad_percentage
+		(bad_experiences.count.to_f / experiences.count).round(4) * 100
+	end
+
+	def positive_ratings_difference
+		good_experiences.count - bad_experiences.count
+	end
+
+	def negative_ratings_difference
+		bad_experiences.count - good_experiences.count
+	end
+
+	private
 	def self.experiences_from_today(experiences)
 		experiences.select {| _, experience| experience["time"].to_date.today? }
 	end
