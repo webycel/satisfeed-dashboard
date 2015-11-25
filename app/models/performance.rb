@@ -1,4 +1,3 @@
-require "parsers/stores_parser"
 class Performance < ActiveRecord::Base
 
 	base_uri = 'https://customersatisfaction.firebaseio.com/'
