@@ -1,3 +1,4 @@
+require "parsers/stores_parser"
 class Performance < ActiveRecord::Base
 
 	base_uri = 'https://customersatisfaction.firebaseio.com/'
@@ -7,17 +8,14 @@ class Performance < ActiveRecord::Base
 	scope :all_stores, -> () { firebase.get("stores") }
 
 	def self.get_best_store(stores, filter, experience)
-		# Rails.logger.info("stores: #{stores.inspect}")
 		best_store = Hash.new
 
 		best_good_counter = 0
 		best_bad_counter = 0
 
-		# parsed_stores = StoresParser.parse(stores)
+		parsed_stores = StoresParser.parse(stores)
 
 		stores.each do |key, store|
-			Rails.logger.info("stores: #{stores.inspect}")
-			# create_store
 
 			good_counter = 0
 			good_percentage = 0
