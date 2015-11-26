@@ -1,6 +1,6 @@
 <div class="row store-reviews">
   <section class="filters small-3 columns">
-    <%= render partial: "form", locals: {store_id: store.name} %>
+    <%= render partial: "form", locals: {store_id: @store.name} %>
     <% if @store == "error" %>
       <p class="panel text-center">
         Sorry, couldn't find any data with this Store ID.
