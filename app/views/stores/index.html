@@ -2,11 +2,13 @@
 	<section class="filters small-3 columns">
 		<%= render partial: "form", locals: {store_id: nil} %>
 	</section>
-	<section class="store small-9 columns hide">
-		<% if !@store %>
+	
+	<% if flash[:error] %>
+		<section class="store small-9 columns">
       <p class="panel text-center">
         Sorry, couldn't find any data with this Store ID.
       </p>
-    <% end %>
-   </section>
+    </section>
+  <% end %>
+   
 </div>

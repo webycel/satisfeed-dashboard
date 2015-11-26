@@ -5,13 +5,11 @@ class StoresController < ApplicationController
 	end
 
 	def search
-		@store_id = params["store_id"]
-		@filter_range = params["range"] || "anytime"
-		@filter_experience = params["experience"]
-		@store = Store.find(@store_id)
+		@filter = params["filter"] || "anytime"
+		@store = Store.find(params["store_id"])
 
 		if @store == "error"
-			redirect_to root_path
+			redirect_to root_path, flash: {error: 'Sorry, couldn\'t find any data with this Store name.'}
 		else
 			# if @filter_range == "today"
 			# 	@store = Store.filter_by_date("today", @store)
