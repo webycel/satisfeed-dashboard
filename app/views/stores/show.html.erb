@@ -10,13 +10,13 @@
         <%= link_to "Overall experience", store_path(id: @store.name) %>
 
         <div class="medium-4 medium-offset-2 columns">
-          <%= link_to store_path(id: @store.name) do %>
+          <%= link_to store_path(id: @store.name, quality: "good") do %>
             <img src="<%= image_url('good.svg') %>" width="100%" alt="good experience" />
             <%= @store.good_experiences.count %>
           <% end %>
         </div>
         <div class="medium-4 columns end">
-          <%= link_to store_path(id: @store.name) do %>
+          <%= link_to store_path(id: @store.name, quality: "bad") do %>
             <img src="<%= image_url('bad.svg') %>" width="100%" alt="bad experience" />
             <%= @store.bad_experiences.count %>
           <% end %>
@@ -24,17 +24,17 @@
       </div>
 
       <div class="rating">
-        <%= link_to "Yesterday's experience", store_path(id: @store.name) %>
+        <%= link_to "Yesterday's experience", store_path(id: @store.name, range: "yesterday") %>
         <div class="medium-4 medium-offset-2 columns">
-          <%= link_to store_path(id: @store.name, range: "yesterday") do %>
+          <%= link_to store_path(id: @store.name, range: "yesterday", quality: "good") do %>
             <img src="<%= image_url('good.svg') %>" width="100%" alt="good experience" />
-            <%= @store.good_experiences.count %>
+            <%= @store.yesterdays_good_experiences.count %>
           <% end %>
         </div>
         <div class="medium-4 columns end">
-          <%= link_to store_path(id: @store.name) do %>
+          <%= link_to store_path(id: @store.name, range: "yesterday", quality: "bad") do %>
             <img src="<%= image_url('bad.svg') %>" width="100%" alt="bad experience" />
-            <%= @store.bad_experiences.count %>
+            <%= @store.yesterdays_bad_experiences.count %>
           <% end %>
         </div>
       </div>
@@ -42,15 +42,15 @@
       <div class="rating">
         <%= link_to "Today's experience", store_path(id: @store.name, range: "today") %>
         <div class="medium-4 medium-offset-2 columns">
-          <%= link_to store_path(id: @store.name, range: "yesterday") do %>
+          <%= link_to store_path(id: @store.name, range: "today", quality: "good") do %>
             <img src="<%= image_url('good.svg') %>" width="100%" alt="good experience" />
-            <%= @store.good_experiences.count %>
+            <%= @store.todays_good_experiences.count %>
           <% end %>
         </div>
         <div class="medium-4 columns end">
-          <%= link_to store_path(id: @store.name) do %>
+          <%= link_to store_path(id: @store.name, range: "today", quality: "bad") do %>
             <img src="<%= image_url('bad.svg') %>" width="100%" alt="bad experience" />
-            <%= @store.bad_experiences.count %>
+            <%= @store.todays_bad_experiences.count %>
           <% end %>
         </div>
       </div>

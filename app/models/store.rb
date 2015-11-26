@@ -15,20 +15,7 @@ class Store
 		else
 			@store = "error"
 		end
-		
 	end 
-
-	def self.get_by_experience(experiences, rating)
-		experiences.select { |_, experience| experience["experience"] == rating }
-	end
-
-	def self.filter_by_date(time, experiences)
-		if time == "today"
-			experiences_from_today(experiences)
-		elsif time == "yesterday"
-			experiences_from_yesterday(experiences)
-		end
-	end
 
 	def self.ranked_by_percentage
 		stores = StoresParser.parse(@firebase.get("stores").body)
@@ -60,15 +47,35 @@ class Store
 		bad_experiences.count - good_experiences.count
 	end
 
-	private
-	def self.experiences_from_today(experiences)
-		experiences.select {| _, experience| experience["time"].to_date.today? }
+	def yesterdays_experiences
+		experiences.select(&:from_yesterday?)
 	end
 
-	def self.experiences_from_yesterday(experiences)
-		experiences.select do |_, experience|
-			experience["time"].to_date.advance(:days => 1).today?
-		end
+	def yesterdays_good_experiences
+		good_experiences.select(&:from_yesterday?)
+	end
+
+	def yesterdays_bad_experiences
+		bad_experiences.select(&:from_yesterday?)
+	end
+
+	def todays_experiences
+		experiences.select(&:from_today?)
+	end
+
+	def todays_good_experiences
+		good_experiences.select(&:from_today?)
+	end
+
+	def todays_bad_experiences
+		bad_experiences.select(&:from_today?)
+	end
+
+	def filter_experiences(quality=nil, range=nil)
+		return experiences if !quality && !range
+		return send("#{quality}_experiences") if !range 
+		return send("#{range}s_experiences") if !quality
+		return send("#{range}s_#{quality}_experiences")
 	end
 
 end
