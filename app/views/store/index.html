@@ -2,113 +2,31 @@
 
 	<section class="filters small-3 columns">
 
-		<%= form_tag "/store", :method => "GET" do %>
+		<%= form_tag search_path, :method => "get" do %>
 			<%= label_tag :store_id, "Enter Store ID:" %>
 			<%= text_field_tag :store_id,  @store_id %>
 			<%= submit_tag "Search", :class => "button expand" %>
 		<% end %>
 
-		<% if @good_experiences && @bad_experiences %>
+		<% if @store.good_experiences.any? && @store.bad_experiences.any? %>
 			<div class="rating">
 
-				<%= link_to "Overall experience", store_path(:controller => "dashboard", :store_id => @store_id) %>
+				<%= link_to "Overall experience", store_path(id: @store_id) %>
 
 				<div class="medium-4 medium-offset-2 columns">
-					<%= link_to store_path(:controller => "dashboard", :store_id => @store_id, :experience => "good") do %>
+					<%= link_to store_path(id: @store_id) do %>
 						<img src="<%= image_url('good.svg') %>" width="100%" alt="good experience" />
-						<%= @good_experiences.length %>
+						<%= @store.good_experiences.count %>
 					<% end %>
 				</div>
 				<div class="medium-4 columns end">
-					<%= link_to store_path(:controller => "dashboard", :store_id => @store_id, :experience => "bad") do %>
+					<%= link_to store_path(id: @store_id) do %>
 						<img src="<%= image_url('bad.svg') %>" width="100%" alt="bad experience" />
-						<%= @bad_experiences.length %>
-					<% end %>
-				</div>
-			</div>
-
-			<div class="rating">
-
-				<%= link_to "Today's experience", store_path(:controller => "dashboard", :store_id => @store_id, :range => "today") %>
-
-				<div class="medium-4 medium-offset-2 columns">
-					<%= link_to store_path(:controller => "dashboard", :store_id => @store_id, :experience => "good", :range => "today") do %>
-						<img src="<%= image_url('good.svg') %>" width="100%" alt="good experience" />
-						<%= Store.filter_by_date("today", @good_experiences).length %>
-					<% end %>
-				</div>
-				<div class="medium-4 columns end">
-					<%= link_to store_path(:controller => "dashboard", :store_id => @store_id, :experience => "bad", :range => "today") do %>
-						<img src="<%= image_url('bad.svg') %>" width="100%" alt="bad experience" />
-						<%= Store.filter_by_date("today", @bad_experiences).length %>
-					<% end %>
-				</div>
-			</div>
-
-			<div class="rating">
-
-				<%= link_to "Yesterday's experience", store_path(:controller => "dashboard", :store_id => @store_id, :range => "yesterday") %>
-
-				<div class="medium-4 medium-offset-2 columns">
-					<%= link_to store_path(:controller => "dashboard", :store_id => @store_id, :experience => "good", :range => "yesterday") do %>
-						<img src="<%= image_url('good.svg') %>" width="100%" alt="good experience" />
-						<%= Store.filter_by_date("yesterday", @good_experiences).length %>
-					<% end %>
-				</div>
-				<div class="medium-4 columns end">
-					<%= link_to store_path(:controller => "dashboard", :store_id => @store_id, :experience => "bad", :range => "yesterday") do %>
-						<img src="<%= image_url('bad.svg') %>" width="100%" alt="bad experience" />
-						<%= Store.filter_by_date("yesterday", @bad_experiences).length %>
+						<%= @store.bad_experiences.count %>
 					<% end %>
 				</div>
 			</div>
 		<% end %>
-
-	</section>
-
-	<section class="store small-9 columns">
-
-		<% unless @store_id %>
-			<p class="panel text-center">
-				Please enter a store ID to view the reviews for a specific store.
-			</p>
-		<% else %>
-			<% unless @store %>
-				<p class="panel text-center">
-					Sorry, couldn't find any data with this Store ID.
-				</p>
-			<% else %>
-				<h1 class="store-id">Store ID: <%= @store_id %></h1>
-
-				<% if @filter_range || @filter_experience %>
-					<p class="filter-list clearfix">
-						<b>Filters:</b>
-						<% if @filter_range %>
-							<span>Showing <%= @filter_range %></span>
-						<% end %>
-						<% if @filter_experience %>
-							<span>| <%= @filter_experience %> experience</span>
-						<% end %>
-						<% if @filter_range != "anytime" || @filter_experience %>
-							<%= link_to "Clear all filters", store_path(:controller => "dashboard", :store_id => @store_id), :class => "right" %>
-						<% end %>
-					</p>
-				<% end %>
-
-				<% if @store.length > 0 %>
-					<ul class="reviews">
-					<% @store.each do |_, store| %>
-						<%= render partial: "store", locals: { store: store} %>
-					<% end %>
-					</ul>
-				<% else %>
-					<p class="panel text-center">
-						Sorry, couldn't find any experiences with this Store ID and filter.
-					</p>
-				<% end %>
-			<% end %>
-		<% end %>
-
 	</section>
 
 </div>

@@ -4,22 +4,11 @@ class StoreController < ApplicationController
 
 	end
 
-	def store
+	def search
 		@store_id = params["store_id"]
 		@filter_range = params["range"] || "anytime"
 		@filter_experience = params["experience"]
-		@store = Store.get(@store_id).body
-
-		if @store
-			@good_experiences = Store.get_by_experience(@store, "good")
-			@bad_experiences = Store.get_by_experience(@store, "bad")
-		end
-
-		if @filter_experience == "good"
-			@store = @good_experiences
-		elsif @filter_experience == "bad"
-			@store = @bad_experiences
-		end
+		@store = Store.find(@store_id)
 
 		if @filter_range == "today"
 			@store = Store.filter_by_date("today", @store)
@@ -28,6 +17,11 @@ class StoreController < ApplicationController
 		end
 
 		render "store/index"
+	end
+
+	def show
+		@store = Store.find(@store_id)
+		render :show
 	end
 
 end

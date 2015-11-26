@@ -5,10 +5,12 @@ class Store
 
 	attr_accessor :name
   attr_accessor :experiences
+  attr_accessor	:stores
 
   ### INSTANCE METHODS
-	def self.show(store_id)
-		firebase.get("stores/" + (CGI.escape store_id))
+	def self.find(store_id)
+		StoreParser.new.parse_store(store_id, @firebase.get("stores/" + (CGI.escape store_id)).body)
+		# raise @firebase.get("stores/" + (CGI.escape store_id)).body.inspect
 	end 
 
 	def self.get_by_experience(experiences, rating)
@@ -24,9 +26,8 @@ class Store
 	end
 
 	def self.ranked_by_percentage
-		StoresParser.parse(@firebase.get("stores").body).map do |store|
-			[store, store.good_percentage]
-		end.sort_by{|store, percentage| percentage}.reverse
+		stores = StoresParser.parse(@firebase.get("stores").body)
+		stores.sort_by{|store| store.good_percentage}.reverse
 	end
 
 	### CLASS METHODS

@@ -6,7 +6,7 @@ class StoreParser
   def parse_store(name, store_data)
     object.tap do |store|
       store.name = name
-      store.experiences = parse_experiences(store, store_data)    
+      store.experiences = parse_experiences(store, store_data) 
     end
   end
 

@@ -36,35 +36,27 @@ class Performance
 	end
 
 	def self.best_percentage_store
-		sorted_stores = {}
-		parsed_stores.each{|store| sorted_stores[store] = store.good_percentage}
-		sorted_stores.sort_by{|store, percentage| percentage }.last.first
+		parsed_stores.max_by{|store| store.good_percentage }
 	end
 
 	def self.best_amount_store
-		parsed_stores.map{|store| [store, store.good_experiences.count]}.max_by{|store, count| count}.first
+		parsed_stores.max_by{|store| store.good_experiences.count }
 	end
 
 	def self.positive_difference_store
-		parsed_stores.map do |store| 
-			[store, store.positive_ratings_difference]
-		end.max_by{|store, difference| difference}.first
+		parsed_stores.max_by{ |store| store.positive_ratings_difference }
 	end
 
 	def self.worst_percentage_store
-		sorted_stores = {}
-		parsed_stores.each{|store| sorted_stores[store] = store.bad_percentage}
-		sorted_stores.sort_by{|store, percentage| percentage }.last.first
+		parsed_stores.max_by{|store| (store.bad_percentage)}
 	end
 
 	def self.worst_amount_store
-		parsed_stores.map{|store| [store, store.bad_experiences.count]}.max_by{|store, count| count}.first
+		parsed_stores.max_by{|store| store.bad_experiences.count }
 	end
 
 	def self.negative_difference_store
-		parsed_stores.map do |store| 
-			[store, store.negative_ratings_difference]
-		end.max_by{|store, difference| difference}.first
+		parsed_stores.max_by{ |store| store.negative_ratings_difference }
 	end
 
 end

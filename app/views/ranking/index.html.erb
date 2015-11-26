@@ -13,11 +13,11 @@
       <tbody>
         <% @stores.each do |store| %>
           <tr class="row">
-            <td class="description"><%= store.first.name %></td>
-            <td class="description"><%= store.first.experiences.count %></td>
-            <td class="description"><%= store.first.good_experiences.count %></td>
-            <td class="description"><%= store.first.bad_experiences.count %></td>
-            <td class="description"><%= store.last %></td>
+            <td class="description"><%= store.name %></td>
+            <td class="description"><%= store.experiences.count %></td>
+            <td class="description"><%= store.good_experiences.count %></td>
+            <td class="description"><%= store.bad_experiences.count %></td>
+            <td class="description"><%= store.good_percentage %></td>
           </tr>
         <% end %>
       </tbody>
