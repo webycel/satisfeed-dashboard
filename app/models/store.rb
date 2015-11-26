@@ -9,9 +9,9 @@ class Store
 
   ### INSTANCE METHODS
 	def self.find(store_id)
-		response = @firebase.get("stores/" + (CGI.escape store_id)).body
+		response = @firebase.get("stores/#{CGI.escape(store_id)}").body
 		if !response.nil?
-			@store = StoreParser.new.parse_store(store_id, @firebase.get("stores/" + (CGI.escape store_id)).body)
+			@store = StoreParser.new.parse_store(store_id, @firebase.get("stores/#{CGI.escape(store_id)}").body)
 		else
 			@store = "error"
 		end
