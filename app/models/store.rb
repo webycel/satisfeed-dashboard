@@ -9,8 +9,13 @@ class Store
 
   ### INSTANCE METHODS
 	def self.find(store_id)
-		StoreParser.new.parse_store(store_id, @firebase.get("stores/" + (CGI.escape store_id)).body)
-		# raise @firebase.get("stores/" + (CGI.escape store_id)).body.inspect
+		response = @firebase.get("stores/" + (CGI.escape store_id)).body
+		if !response.nil?
+			@store = StoreParser.new.parse_store(store_id, @firebase.get("stores/" + (CGI.escape store_id)).body)
+		else
+			@store = "error"
+		end
+		
 	end 
 
 	def self.get_by_experience(experiences, rating)

@@ -1,14 +1,16 @@
 <div class="row store-reviews">
-
 	<section class="filters small-3 columns">
-
 		<%= form_tag search_path, :method => "get" do %>
 			<%= label_tag :store_id, "Enter Store ID:" %>
 			<%= text_field_tag :store_id,  @store_id %>
 			<%= submit_tag "Search", :class => "button expand" %>
 		<% end %>
 
-		<% if @store.good_experiences.any? && @store.bad_experiences.any? %>
+		<% if @store == "error" %>
+			<p class="panel text-center">
+				Sorry, couldn't find any data with this Store ID.
+			</p>
+		<% else @store.good_experiences.any? && @store.bad_experiences.any? %>
 			<div class="rating">
 
 				<%= link_to "Overall experience", store_path(id: @store_id) %>
@@ -28,5 +30,4 @@
 			</div>
 		<% end %>
 	</section>
-
 </div>
