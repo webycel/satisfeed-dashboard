@@ -1,0 +1,14 @@
+<section class="store small-9 columns">
+  <h1 class="store-id">Store ID: <%= @store.name %></h1>
+  <% if @store.experiences.any? %>
+    <ul class="reviews">
+      <% @store.experiences.each do |experience| %>
+        <%= render partial: "experience", locals: { experience: experience} %>
+      <% end %>
+    </ul>
+  <% else %>
+    <p class="panel text-center">
+      Sorry, couldn't find any experiences with this Store ID and filter.
+    </p>
+  <% end %>
+</section>
