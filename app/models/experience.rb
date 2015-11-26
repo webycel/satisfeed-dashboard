@@ -12,6 +12,14 @@ class Experience
   def bad_experience?
     description == "bad"
   end
+
+  def from_today?
+    created_at.day == Time.now().day
+  end
+
+  def from_yesterday?
+    created_at.day == Time.now().day - 1.day
+  end
 end
 
 class Reason

@@ -2,7 +2,7 @@
   <div class="info small-2 columns">
     <img src="<%= image_url(experience.description + '.svg') %>" width="100%" alt="<%= experience.description %> experience" />
     <%= experience.created_at.to_date %>
-    <%= experience.created_at.split[4] %>
+    <%= experience.created_at.strftime("%H:%M:%S") %>
   </div>
   <div class="reason small-10 columns">
     <% if experience.extra_info %>

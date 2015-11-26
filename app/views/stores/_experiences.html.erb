@@ -1,4 +1,18 @@
 <section class="store small-9 columns">
+  <% if @filter_range || @filter_quality %>
+    <p class="filter-list clearfix">
+      <b>Filters:</b>
+      <% if @filter_range %>
+        <span>Showing <%= @filter_range %></span>
+      <% end %>
+      <% if @filter_quality %>
+        <span>| <%= @filter_quality %> experience</span>
+      <% end %>
+      <% if (@filter_range == "good" || @filter_range == "bad") || @filter_quality %>
+        <%= link_to "Clear all filters", store_path, class: "right" %>
+      <% end %>
+    </p>
+  <% end %>
   <h1 class="store-id">Store ID: <%= @store.name %></h1>
   <% if @store.experiences.any? %>
     <ul class="reviews">
