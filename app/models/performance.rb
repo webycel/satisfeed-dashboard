@@ -2,9 +2,7 @@ class Performance
 
 	attr_accessor :parsed_stores, :stores, :firebase
 
-	base_uri = 'https://customersatisfaction.firebaseio.com/'
-
-	@firebase = Firebase::Client.new(base_uri)
+	@firebase = Firebase::Client.new(ENV["FIREBASE_URL"])
 
 	def self.stores
 		@stores = @firebase.get("stores")

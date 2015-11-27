@@ -1,18 +1,16 @@
 class Store
 
-	@base_uri = 'https://customersatisfaction.firebaseio.com/'
+	attr_accessor :name
+  attr_accessor :experiences
+  attr_accessor	:stores
 
 	def self.firebase=(instance_of_firebase)
 		@firebase = instance_of_firebase		
 	end
 
 	def self.firebase
-		@firebase ||= Firebase::Client.new(@base_uri)
+		@firebase ||= Firebase::Client.new(ENV["FIREBASE_URL"])
 	end
-
-	attr_accessor :name
-  attr_accessor :experiences
-  attr_accessor	:stores
 
   ### INSTANCE METHODS
 	def self.find(store_id)
@@ -22,7 +20,7 @@ class Store
 		else
 			@store = "error"
 		end
-	end 
+	end
 
 	def self.stores
 		stores ||= StoresParser.parse(@firebase.get("stores").body)
@@ -83,13 +81,9 @@ class Store
 
 	def filter_experiences(quality=nil, range=nil)
 		return experiences if !quality && !range
-		if !quality
-			send("#{range}s_experiences")
-		elsif !range
-			send("#{quality}_experiences")
-		else
-			send("#{range}s_#{quality}_experiences")
-		end
+		return send("#{quality}_experiences") if !range
+		return send("#{range}s_experiences") if !quality
+		return send("#{range}s_#{quality}_experiences")
 	end
 
 end
