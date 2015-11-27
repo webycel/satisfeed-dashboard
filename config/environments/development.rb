@@ -38,4 +38,7 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # Firebase base URL
+  config.firebase_url = "https://customersatisfaction.firebaseio.com/"
 end

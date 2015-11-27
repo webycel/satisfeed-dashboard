@@ -2,7 +2,7 @@ class Performance
 
 	attr_accessor :parsed_stores, :stores, :firebase
 
-	base_uri = 'https://customersatisfaction.firebaseio.com/'
+	base_uri = Rails.application.config.firebase_url
 
 	@firebase = Firebase::Client.new(base_uri)
 

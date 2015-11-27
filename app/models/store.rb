@@ -1,6 +1,6 @@
 class Store
 
-	@base_uri = 'https://customersatisfaction.firebaseio.com/'
+	@base_uri = Rails.application.config.firebase_url
 	@firebase ||= Firebase::Client.new(@base_uri)
 
 	attr_accessor :name
@@ -15,7 +15,7 @@ class Store
 		else
 			@store = "error"
 		end
-	end 
+	end
 
 	def self.ranked_by_percentage
 		stores = StoresParser.parse(@firebase.get("stores").body)
@@ -73,7 +73,7 @@ class Store
 
 	def filter_experiences(quality=nil, range=nil)
 		return experiences if !quality && !range
-		return send("#{quality}_experiences") if !range 
+		return send("#{quality}_experiences") if !range
 		return send("#{range}s_experiences") if !quality
 		return send("#{range}s_#{quality}_experiences")
 	end
