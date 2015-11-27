@@ -2,6 +2,26 @@ require 'rails_helper'
 
 RSpec.describe Store do
   subject { described_class.new }
+  let(:store_data) { JSON.parse(fixture("stores.json").read) }
+
+  # describe ".ranked_by_percentage" do
+  #   let(:subject) { described_class}
+  # end
+
+  describe ".stores" do
+    let(:subject) { described_class }
+    let(:firebase) { double(:firebase) }
+    let(:firebase_response) { double(:firebase_response) }
+    before do
+      subject.firebase = firebase
+      allow(firebase).to receive(:get).and_return(firebase_response)
+      allow(firebase_response).to receive(:body).and_return(store_data)
+    end
+    it "gets the data from Firebase and parses it into store objects" do
+      expect(StoresParser).to receive(:parse).with(store_data)
+      subject.stores
+    end
+  end
 
   describe "selecting stores by performance" do
     let(:good_experience) {double(:experience, good_experience?: true, bad_experience?: false)}

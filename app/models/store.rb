@@ -1,7 +1,14 @@
 class Store
 
 	@base_uri = 'https://customersatisfaction.firebaseio.com/'
-	@firebase ||= Firebase::Client.new(@base_uri)
+
+	def self.firebase=(instance_of_firebase)
+		@firebase = instance_of_firebase		
+	end
+
+	def self.firebase
+		@firebase ||= Firebase::Client.new(@base_uri)
+	end
 
 	attr_accessor :name
   attr_accessor :experiences
@@ -10,15 +17,18 @@ class Store
   ### INSTANCE METHODS
 	def self.find(store_id)
 		response = @firebase.get("stores/#{CGI.escape(store_id)}").body
-		if !response.nil?
+		unless response.nil?
 			@store = StoreParser.new.parse_store(store_id, @firebase.get("stores/#{CGI.escape(store_id)}").body)
 		else
 			@store = "error"
 		end
 	end 
 
+	def self.stores
+		stores ||= StoresParser.parse(@firebase.get("stores").body)
+	end
+
 	def self.ranked_by_percentage
-		stores = StoresParser.parse(@firebase.get("stores").body)
 		stores.sort_by{|store| store.good_percentage}.reverse
 	end
 
