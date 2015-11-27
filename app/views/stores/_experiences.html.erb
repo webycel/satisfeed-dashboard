@@ -6,7 +6,7 @@
         <span>Showing <%= @filter_range %></span>
       <% end %>
       <% if @filter_quality %>
-        <span>| <%= @filter_quality %> experience</span>
+        <span>| <%= @filter_quality %> experiences</span>
       <% end %>
       <% if (@filter_range == "good" || @filter_range == "bad") || @filter_quality %>
         <%= link_to "Clear all filters", store_path, class: "right" %>
