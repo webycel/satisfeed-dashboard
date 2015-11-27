@@ -8,7 +8,6 @@
     <% elsif @store %>
       <div class="rating">
         <%= link_to "Overall experience", store_path(id: @store.name) %>
-
         <div class="medium-4 medium-offset-2 columns">
           <%= link_to store_path(id: @store.name, quality: "good") do %>
             <img src="<%= image_url('good.svg') %>" width="100%" alt="good experience" />
@@ -56,5 +55,5 @@
       </div>
     <% end %>
   </section>
-  <%= render partial: "experiences", locals: {store: @store} %>
+  <%= render partial: "experiences", locals: {store: @store, experiences: @experiences } %>
 </div>

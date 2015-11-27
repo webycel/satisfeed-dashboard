@@ -14,8 +14,8 @@ class StoresController < ApplicationController
 
 	def show
 		@store = Store.find(params[:id])
-		@filter_quality = params[:quality] || "all"
-		@filter_range = params[:range] || "anytime"
+		@filter_quality = params[:quality] || nil
+		@filter_range = params[:range] || nil
 		@experiences = @store.filter_experiences(@filter_quality, @filter_range)
 	end
 

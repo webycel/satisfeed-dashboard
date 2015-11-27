@@ -16,7 +16,7 @@ class Store
 
   ### INSTANCE METHODS
 	def self.find(store_id)
-		response = @firebase.get("stores/#{CGI.escape(store_id)}").body
+		response = firebase.get("stores/#{CGI.escape(store_id)}").body
 		unless response.nil?
 			@store = StoreParser.new.parse_store(store_id, @firebase.get("stores/#{CGI.escape(store_id)}").body)
 		else
@@ -81,13 +81,17 @@ class Store
 		bad_experiences.select(&:from_today?)
 	end
 
-	def filter_experiences(quality="anytime", range="all")
-		return experiences if quality != "anytime" && range != "all"
-		quality_filter = quality == "anytime" ? nil : quality
-		range_filter = range == "all" ? nil : range
-		return send("#{quality_filter}_experiences") if !range 
-		return send("#{range_filter}s_experiences") if !quality
-		return send("#{range_filter}s_#{quality_filter}_experiences")
+	def filter_experiences(quality=nil, range=nil)
+
+		return experiences if (!quality && !range)
+		Rails.logger.info("\n*******\n after first return \n\n")
+		if !quality
+			@experiences = send("#{range}s_experiences")
+		elsif !range
+			@experiences = send("#{quality}_experiences")
+		else
+			@experiences = send("#{range}s_#{quality}_experiences")
+		end
 	end
 
 end

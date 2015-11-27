@@ -4,10 +4,6 @@ RSpec.describe Store do
   subject { described_class.new }
   let(:store_data) { JSON.parse(fixture("stores.json").read) }
 
-  # describe ".ranked_by_percentage" do
-  #   let(:subject) { described_class}
-  # end
-
   describe ".stores" do
     let(:subject) { described_class }
     let(:firebase) { double(:firebase) }
@@ -20,6 +16,23 @@ RSpec.describe Store do
     it "gets the data from Firebase and parses it into store objects" do
       expect(StoresParser).to receive(:parse).with(store_data)
       subject.stores
+    end
+  end
+
+  describe ".ranked_by_percentage" do
+    let(:subject) { described_class}
+    let(:good_store) {double(:store, good_percentage: 80)}
+    let(:bad_store) {double(:store, good_percentage: 20)}
+    let(:rubbish_store) {double(:store, good_percentage: 0)}
+    let(:excellent_store) {double(:store, good_percentage: 100)}
+    let(:store_instances) {[good_store,bad_store,rubbish_store,excellent_store]}
+    
+    before do 
+      allow(subject).to receive(:stores).and_return(store_instances)
+    end
+      
+    it "returns array of stores sorted in reverse order by its percentage score" do
+      expect(subject.ranked_by_percentage).to eq [excellent_store,good_store,bad_store,rubbish_store]
     end
   end
 
@@ -74,17 +87,23 @@ RSpec.describe Store do
   end
 
   describe "filtering experiences" do
-    context "#todays_experiences" do
+    context "#with no params" do
+      it "returns all experiences"
+        subject.experiences = experiences
+        expect(subject.filter_experiences).to eq experiences
+      end
+    end
+    context "received today" do
       let(:today_experience) {double(:experience, from_today?: true)}
-      it "returns the experiences created today" do
+      it "returns all experiences from today" do
         subject.experiences = [today_experience]
         expect(subject.todays_experiences).to eq [today_experience]
       end
     end
 
-    context "#yesterdays_experiences" do
+    context "received yesterday" do
       let(:yesterday_experience) {double(:experience, from_yesterday?: true)}
-      it "returns the experiences created yesterday" do
+      it "returns all experiences from yesterday" do
         subject.experiences = [yesterday_experience]
         expect(subject.yesterdays_experiences).to eq [yesterday_experience]
       end

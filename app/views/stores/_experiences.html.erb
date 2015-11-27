@@ -14,9 +14,9 @@
     </p>
   <% end %>
   <h1 class="store-id">Store ID: <%= @store.name %></h1>
-  <% if @store.experiences.any? %>
+  <% if @experiences.any? %>
     <ul class="reviews">
-      <% @store.experiences.each do |experience| %>
+      <% @experiences.each do |experience| %>
         <%= render partial: "experience", locals: { experience: experience} %>
       <% end %>
     </ul>
