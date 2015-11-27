@@ -88,7 +88,8 @@ RSpec.describe Store do
 
   describe "filtering experiences" do
     context "#with no params" do
-      it "returns all experiences"
+      let(:experiences) { [double(:experience), double(:experience)]}
+      it "returns all experiences" do
         subject.experiences = experiences
         expect(subject.filter_experiences).to eq experiences
       end
@@ -108,7 +109,6 @@ RSpec.describe Store do
         expect(subject.yesterdays_experiences).to eq [yesterday_experience]
       end
     end
-
   end
 
 end
