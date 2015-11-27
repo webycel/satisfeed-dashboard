@@ -4,6 +4,7 @@ class StoresController < ApplicationController
 	end
 
 	def search
+		Rails.logger.info("\n\n ***** params: #{params} **** \n\n")
 		@store = Store.find(params["store_id"])
 		if @store == "error"
 			redirect_to root_path, flash: {error: 'Sorry, couldn\'t find any data with this Store name.'}

@@ -81,16 +81,14 @@ class Store
 		bad_experiences.select(&:from_today?)
 	end
 
-	def filter_experiences(quality=nil, range=nil)
-
-		return experiences if (!quality && !range)
-		Rails.logger.info("\n*******\n after first return \n\n")
+	def filter_experiences(quality, range)
+		return experiences if !quality && !range
 		if !quality
-			@experiences = send("#{range}s_experiences")
+			send("#{range}s_experiences")
 		elsif !range
-			@experiences = send("#{quality}_experiences")
+			send("#{quality}_experiences")
 		else
-			@experiences = send("#{range}s_#{quality}_experiences")
+			send("#{range}s_#{quality}_experiences")
 		end
 	end
 
