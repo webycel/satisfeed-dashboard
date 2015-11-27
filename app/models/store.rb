@@ -71,11 +71,13 @@ class Store
 		bad_experiences.select(&:from_today?)
 	end
 
-	def filter_experiences(quality=nil, range=nil)
-		return experiences if !quality && !range
-		return send("#{quality}_experiences") if !range 
-		return send("#{range}s_experiences") if !quality
-		return send("#{range}s_#{quality}_experiences")
+	def filter_experiences(quality="anytime", range="all")
+		return experiences if quality != "anytime" && range != "all"
+		quality_filter = quality == "anytime" ? nil : quality
+		range_filter = range == "all" ? nil : range
+		return send("#{quality_filter}_experiences") if !range 
+		return send("#{range_filter}s_experiences") if !quality
+		return send("#{range_filter}s_#{quality_filter}_experiences")
 	end
 
 end
