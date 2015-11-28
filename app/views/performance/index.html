@@ -17,15 +17,8 @@
 			</div>
 		</div>
 		<div class="row">
-			<section class="small-6 columns">
-				<h2 class="title"><span>Best performing store</span></h2>
-				<%= render partial: 'reviews_panel', locals: { store: @best_store } %>
-			</section>
-			<section class="small-6 columns">
-				<h2 class="title"><span>Worst performing store</span></h2>
-				<%= render partial: 'reviews_panel', locals: { store: @worst_store } %>
-			</section>
-		</div>
+			<%= render partial: 'reviews_panel', locals: { quality: "Best", store: @best_store } %>
+			<%= render partial: 'reviews_panel', locals: { quality: "Worst", store: @worst_store } %>
 	<% else %>
 		<p class="panel text-center">
 			Sorry, there are currently no performance reports.
