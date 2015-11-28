@@ -23,7 +23,7 @@ class Store
 	end
 
 	def self.stores
-		stores ||= StoresParser.parse(@firebase.get("stores").body)
+		stores ||= StoresParser.parse(firebase.get("stores").body)
 	end
 
 	def self.ranked_by_percentage
@@ -40,11 +40,11 @@ class Store
 	end
 
 	def good_percentage
-		(good_experiences.count.to_f / experiences.count).round(4) * 100
+		(good_experiences.count.to_f / experiences.count * 100).round 
 	end
 
 	def bad_percentage
-		(bad_experiences.count.to_f / experiences.count).round(4) * 100
+		(bad_experiences.count.to_f / experiences.count * 100).round 
 	end
 
 	def positive_ratings_difference

@@ -46,7 +46,7 @@ class Performance
 	end
 
 	def self.worst_percentage_store
-		parsed_stores.max_by{|store| (store.bad_percentage)}
+		parsed_stores.max_by{|store| store.bad_percentage }
 	end
 
 	def self.worst_amount_store
