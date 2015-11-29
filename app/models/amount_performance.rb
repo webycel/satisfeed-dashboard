@@ -1,4 +1,4 @@
-class AmountPerformance < Performance
+class AmountPerformance < StorePerformance
   
   def self.get_best_store
     parsed_stores.max_by{|store| store.good_experiences.count }

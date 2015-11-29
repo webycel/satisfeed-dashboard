@@ -5,13 +5,13 @@
 				<dl class="sub-nav">
 					<dt>Sorting: </dt>
 					<dd class="<%= 'active' if @filter == 'amount' %>">
-						<%= link_to "Amount", performance_path(:controller => "performance") %>
+						<%= link_to "Amount", store_performance_path %>
 					</dd>
 					<dd class="<%= 'active' if @filter == 'percentage' %>">
-						<%= link_to "Percentage", performance_path(:controller => "performance", :filter => "percentage") %>
+						<%= link_to "Percentage", store_performance_path(filter: "percentage") %>
 					</dd>
 					<dd class="<%= 'active' if @filter == 'difference' %>">
-						<%= link_to "Difference", performance_path(:controller => "performance", :filter => "difference") %>
+						<%= link_to "Difference", store_performance_path(filter: "difference") %>
 					</dd>
 				</dl>
 			</div>

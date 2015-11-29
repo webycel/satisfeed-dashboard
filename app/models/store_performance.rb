@@ -1,4 +1,4 @@
-class Performance
+class StorePerformance
 
 	attr_accessor :parsed_stores, :stores
 

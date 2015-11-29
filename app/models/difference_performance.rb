@@ -1,4 +1,4 @@
-class DifferencePerformance < Performance
+class DifferencePerformance < StorePerformance
 
   def self.get_best_store
     parsed_stores.max_by{ |store| store.positive_ratings_difference }

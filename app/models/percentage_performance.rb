@@ -1,4 +1,4 @@
-class PercentagePerformance < Performance
+class PercentagePerformance < StorePerformance
 
   def self.get_best_store
     parsed_stores.max_by{|store| store.good_percentage }
