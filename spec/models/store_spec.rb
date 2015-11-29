@@ -60,14 +60,14 @@ RSpec.describe Store do
     context "#good_percentage" do
       it "calculates the percentage of good ratings" do
         subject.experiences = experiences
-        expect(subject.good_percentage).to eq 33.33
+        expect(subject.good_percentage).to eq 33
       end
     end
 
     context "#bad_percentage" do
       it "calculates the percentage of bad ratings" do
         subject.experiences = experiences
-        expect(subject.bad_percentage).to eq 66.67
+        expect(subject.bad_percentage).to eq 67
       end
     end
 
