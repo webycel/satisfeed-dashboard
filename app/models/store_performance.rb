@@ -1,5 +1,7 @@
 class StorePerformance
 
+	FILTERS = %w(amount percentage difference)
+
 	attr_accessor :parsed_stores, :stores
 
 	def self.firebase=(instance_of_firebase)

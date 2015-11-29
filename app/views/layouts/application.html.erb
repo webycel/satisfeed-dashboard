@@ -16,13 +16,12 @@
 
     <header class="header row">
       <nav class="small-12 small-centered columns">
-          <%= link_to "", root_path, :class => "ms-logo" %>
-
-          <ul class="nav">
-              <li <%= 'class=active' if current_page?(root_path) %>><%= link_to "Store Reviews", root_path %></li>
-              <li <%= 'class=active' if current_page?(store_performance_path) %>><%= link_to "Store Performance", store_performance_path %></li>
-              <li <%= 'class=active' if current_page?(ranking_path) %>><%= link_to "Store Ranking", ranking_path %></li>
-          </ul>
+        <%= link_to "", root_path, :class => "ms-logo" %>
+        <ul class="nav">
+          <li <%= 'class=active' if current_page?(root_path) %>><%= link_to "Store Reviews", root_path %></li>
+          <li <%= 'class=active' if current_page?(store_performance_path) %>><%= link_to "Store Performance", store_performance_path %></li>
+          <li <%= 'class=active' if current_page?(ranking_path) %>><%= link_to "Store Ranking", ranking_path %></li>
+        </ul>
       </nav>
     </header>
 

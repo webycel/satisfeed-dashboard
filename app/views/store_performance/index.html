@@ -2,18 +2,12 @@
 	<% if @stores.length > 0 %>
 		<div class="row">
 			<div class="small-11 small-centered columns">
-				<dl class="sub-nav">
-					<dt>Sorting: </dt>
-					<dd class="<%= 'active' if @filter == 'amount' %>">
-						<%= link_to "Amount", store_performance_path %>
-					</dd>
-					<dd class="<%= 'active' if @filter == 'percentage' %>">
-						<%= link_to "Percentage", store_performance_path(filter: "percentage") %>
-					</dd>
-					<dd class="<%= 'active' if @filter == 'difference' %>">
-						<%= link_to "Difference", store_performance_path(filter: "difference") %>
-					</dd>
-				</dl>
+			  <dl class="sub-nav">
+			    <dt>FILTER BY: </dt>
+			    <% StorePerformance::FILTERS.each do |filter_name| %>
+			      <%= link_for_filter(@filter, filter_name) %>
+			    <% end %>
+			  </dl>
 			</div>
 		</div>
 		<div class="row">
