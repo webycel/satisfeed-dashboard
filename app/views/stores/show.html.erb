@@ -1,0 +1,59 @@
+<div class="row store-reviews">
+  <section class="filters small-3 columns">
+    <%= render partial: "form", locals: {store_id: @store.name} %>
+    <% if @store == "error" %>
+      <p class="panel text-center">
+        Sorry, couldn't find any data with this Store ID.
+      </p>
+    <% elsif @store %>
+      <div class="rating">
+        <%= link_to "Overall experience", store_path(id: @store.name) %>
+        <div class="medium-4 medium-offset-2 columns">
+          <%= link_to store_path(id: @store.name, quality: "good") do %>
+            <img src="<%= image_url('good.svg') %>" width="100%" alt="good experience" />
+            <%= @store.good_experiences.count %>
+          <% end %>
+        </div>
+        <div class="medium-4 columns end">
+          <%= link_to store_path(id: @store.name, quality: "bad") do %>
+            <img src="<%= image_url('bad.svg') %>" width="100%" alt="bad experience" />
+            <%= @store.bad_experiences.count %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="rating">
+        <%= link_to "Yesterday's experience", store_path(id: @store.name, range: "yesterday") %>
+        <div class="medium-4 medium-offset-2 columns">
+          <%= link_to store_path(id: @store.name, range: "yesterday", quality: "good") do %>
+            <img src="<%= image_url('good.svg') %>" width="100%" alt="good experience" />
+            <%= @store.yesterdays_good_experiences.count %>
+          <% end %>
+        </div>
+        <div class="medium-4 columns end">
+          <%= link_to store_path(id: @store.name, range: "yesterday", quality: "bad") do %>
+            <img src="<%= image_url('bad.svg') %>" width="100%" alt="bad experience" />
+            <%= @store.yesterdays_bad_experiences.count %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="rating">
+        <%= link_to "Today's experience", store_path(id: @store.name, range: "today") %>
+        <div class="medium-4 medium-offset-2 columns">
+          <%= link_to store_path(id: @store.name, range: "today", quality: "good") do %>
+            <img src="<%= image_url('good.svg') %>" width="100%" alt="good experience" />
+            <%= @store.todays_good_experiences.count %>
+          <% end %>
+        </div>
+        <div class="medium-4 columns end">
+          <%= link_to store_path(id: @store.name, range: "today", quality: "bad") do %>
+            <img src="<%= image_url('bad.svg') %>" width="100%" alt="bad experience" />
+            <%= @store.todays_bad_experiences.count %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </section>
+  <%= render partial: "experiences", locals: {store: @store, experiences: @experiences } %>
+</div>

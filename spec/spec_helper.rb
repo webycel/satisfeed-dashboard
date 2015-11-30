@@ -16,6 +16,9 @@
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require "dotenv"
+Dotenv.load
+
 module FixtureHelper
   FIXTURE_DIR = Pathname.new(File.expand_path("../fixtures/", __FILE__))
 

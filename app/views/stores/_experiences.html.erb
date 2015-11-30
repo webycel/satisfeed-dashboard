@@ -1,0 +1,21 @@
+<section class="store small-9 columns">
+  <% if @filter_range || @filter_quality %>
+    <p class="filter-list clearfix">
+      <b>Filters:</b>
+      <%= format_filter_names(@filter_range, @filter_quality)  %>
+      <%= link_to "Clear all filters", store_path, class: "right" %>
+    </p>
+  <% end %>
+  <h1 class="store-id">Store ID: <%= @store.name %></h1>
+  <% if @experiences.any? %>
+    <ul class="reviews">
+      <% @experiences.each do |experience| %>
+        <%= render partial: "experience", locals: { experience: experience} %>
+      <% end %>
+    </ul>
+  <% else %>
+    <p class="panel text-center">
+      Sorry, couldn't find any experiences with this Store ID and filter.
+    </p>
+  <% end %>
+</section>
