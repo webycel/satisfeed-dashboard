@@ -1,0 +1,21 @@
+<div class="performance">
+	<% if @stores.length > 0 %>
+		<div class="row">
+			<div class="small-11 small-centered columns">
+			  <dl class="sub-nav">
+			    <dt>FILTER BY: </dt>
+			    <% StorePerformance::FILTERS.each do |filter_name| %>
+			      <%= link_for_filter(@filter, filter_name) %>
+			    <% end %>
+			  </dl>
+			</div>
+		</div>
+		<div class="row">
+			<%= render partial: 'reviews_panel', locals: { quality: "Best", store: @best_store } %>
+			<%= render partial: 'reviews_panel', locals: { quality: "Worst", store: @worst_store } %>
+	<% else %>
+		<p class="panel text-center">
+			Sorry, there are currently no performance reports.
+		</p>
+	<% end %>
+</div>
