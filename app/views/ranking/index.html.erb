@@ -13,7 +13,7 @@
       <tbody>
         <% @stores.each do |store| %>
           <tr class="row">
-            <td class="description"><%= store.name %></td>
+            <td class="description"><%= link_to store.name, store_path(store.name) %></td>
             <td class="description"><%= store.experiences.count %></td>
             <td class="description"><%= store.good_experiences.count %></td>
             <td class="description"><%= store.bad_experiences.count %></td>
