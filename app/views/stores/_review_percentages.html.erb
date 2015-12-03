@@ -1,0 +1,7 @@
+<h4><%= quality.capitalize %> reviews</h4>
+<ul>
+  <li>Queue length / time: <%= @store.quality_reason_percentage(quality,"Queue length or time") %>%</li>
+  <li>Quality of service: <%= @store.quality_reason_percentage(quality,"Quality of service") %>%</li>
+  <li>Speed of service: <%= @store.quality_reason_percentage(quality,"Speed of service") %>%</li>
+  <li>Condition of parcel: <%= @store.quality_reason_percentage(quality,"Condition of parcel") %>%</li>
+</ul>

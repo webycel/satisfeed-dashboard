@@ -31,6 +31,10 @@ class Store
 	end
 
 	### CLASS METHODS
+	def quality_reason_percentage(quality, description)
+		(quality_reason_count(quality, description).to_f / total_number_of_reasons * 100).round
+	end
+
 	def good_experiences
 		experiences.select(&:good_experience?)
 	end
@@ -84,6 +88,17 @@ class Store
 		return send("#{quality}_experiences") if !range
 		return send("#{range}s_experiences") if !quality
 		return send("#{range}s_#{quality}_experiences")
+	end
+
+	private
+
+	def total_number_of_reasons
+		experiences.inject(0){|sum, experience| sum + experience.reasons.count }
+	end
+
+	def quality_reason_count(quality, description)
+		experiences_with_reasons = send("#{quality}_experiences").select{|experience| experience.reasons}
+		experiences_with_reasons.inject(0){|sum, experience| sum + experience.num_of_reasons_for(description)}
 	end
 
 end

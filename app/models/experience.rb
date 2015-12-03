@@ -20,6 +20,10 @@ class Experience
   def from_yesterday?
     created_at.day == Time.now().day - 1.day
   end
+
+  def num_of_reasons_for(description)
+    reasons.select{|reason| reason.description == description}.count
+  end
 end
 
 class Reason

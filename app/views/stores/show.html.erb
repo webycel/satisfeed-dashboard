@@ -55,5 +55,15 @@
       </div>
     <% end %>
   </section>
+  <div>
+    <section class="medium-4 columns">
+      <%= render partial: "review_percentages", locals: {quality: "good"} %>
+    </section>
+
+    <section class="medium-4 columns end">
+      <%= render partial: "review_percentages", locals: {quality: "bad"} %>
+    </section>
+  </div>
+
   <%= render partial: "experiences", locals: {store: @store, experiences: @experiences } %>
 </div>

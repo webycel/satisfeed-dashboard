@@ -19,7 +19,7 @@ class StoreParser
         object.extra_info = experience["extraInfo"]
         object.description = experience["experience"]
         object.created_at = experience["time"].to_datetime
-        object.reasons = parse_reasons(experience["why"]) if experience["why"]
+        object.reasons = experience["why"] ? parse_reasons(experience["why"]) : []
       end
     end
   end
