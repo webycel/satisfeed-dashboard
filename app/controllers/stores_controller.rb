@@ -16,7 +16,16 @@ class StoresController < ApplicationController
 		@store = Store.find(params[:id])
 		@filter_quality = params[:quality] || nil
 		@filter_range = params[:range] || nil
-		@experiences = @store.filter_experiences(@filter_quality, @filter_range)
+		respond_to do |format|
+	    format.html do
+	    	@experiences = @store.filter_experiences(@filter_quality, @filter_range)
+	    end
+	    format.csv do
+	    	@experiences = @store.filter_experiences
+	      headers['Content-Disposition'] = "attachment; filename=\"#{@store.name.capitalize}_reviews_#{Time.now}.csv\""
+	      headers['Content-Type'] ||= 'text/csv'
+	    end
+	  end
 	end
 
 end

@@ -7,6 +7,9 @@
     </p>
   <% end %>
   <h1 class="store-id">Store ID: <%= @store.name %></h1>
+  <div class = "export-btn">
+    <%= link_to "Export reviews", store_path(@store.name, format: :csv), class: "button small" %>
+  </div>
   <% if @experiences.any? %>
     <ul class="reviews">
       <% @experiences.each do |experience| %>

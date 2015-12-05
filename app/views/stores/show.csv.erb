@@ -1,0 +1,9 @@
+<% title = ["Reviews for #{@store.name.capitalize}"] %>
+<% headers = ['Good/Bad', 'Comment', 'Number of Reasons', 'Reasons', 'Created on'] %>
+<%= CSV.generate_line title %>
+<%= CSV.generate_line headers %>
+<% @experiences.each do |experience| %>
+  <% experience.reasons.each do |reason| %>
+    <%= CSV.generate_line([experience.description, experience.extra_info, experience.reasons.count, experience.reasons.map(&:description), experience.created_at.strftime("%Y-%m-%d, %H:%M")]) %>
+  <% end %>
+<% end %>
